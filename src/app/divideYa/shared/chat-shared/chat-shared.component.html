@@ -1,0 +1,32 @@
+<div class="container__chat">
+  <mat-toolbar color="primary" class="chat-header">
+    <div class="chat-header-left">
+      <mat-icon>group</mat-icon>
+      <span>{{ dataGroup?.group }}</span>
+    </div>
+    <mat-icon (click)="goBack()">close</mat-icon>
+  </mat-toolbar>
+
+  <div class="chat-container" id="chat-body">
+    <div class="messages">
+      @for (message of getMessageData; track message; let i = $index) {
+        <div class="message" [ngClass]="message.userID === _general.getStorage()?.userID ? 'right' : 'left'">
+          <mat-card class="message-card" [ngClass]="message.userID === _general.getStorage()?.userID ? 'own-message' : 'received-message'">
+            <div class="name">{{ message.userID === _general.getStorage()?.userID ? 'Yo' : message?.userName }}</div>
+            <div class="text">{{ message.chatMessage }}</div>
+            <div class="time">{{ returDate(message.timestamp) | date:'shortTime' }}</div>
+          </mat-card>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <mat-form-field class="input-full" appearance="outline">
+      <input matInput [(ngModel)]="message" placeholder="Escribe un mensaje..." />
+    </mat-form-field>
+    <button mat-fab color="accent" (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>

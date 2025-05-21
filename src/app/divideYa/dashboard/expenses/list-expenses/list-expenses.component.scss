@@ -1,0 +1,153 @@
+.container__expense {
+  margin-top: 2.5rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 10rem;
+  }
+}
+
+.container__expense__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 0;
+
+  img {
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+mat-card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 1rem;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 1rem;
+    color: #666;
+  }
+}
+
+.container__name__group,
+.container__total__amount,
+.container__members,
+.container__value__members,
+.container__members_pay,
+.container__description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.container__check__members__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  .container__button {
+    button {
+      background-color: #e7f3ff;
+      color: #007bff;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: .5rem 1rem;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: #d0eaff;
+      }
+    }
+  }
+}
+
+.container__checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .4rem 0;
+
+  .large-checkbox {
+    flex-grow: 1;
+  }
+
+  span {
+    min-width: 80px;
+    text-align: right;
+  }
+}
+
+.container__button__group {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+
+  button {
+    font-size: 1rem;
+    padding: .7rem;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  .container__button__history button {
+    background-color: #333;
+    color: #fff;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  .container__button__close__group button {
+    background-color: #e0e0e0;
+    color: #000;
+
+    &:hover {
+      background-color: #cacaca;
+    }
+  }
+}
+
+.container__spiner {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

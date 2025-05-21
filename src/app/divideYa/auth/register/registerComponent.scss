@@ -1,0 +1,114 @@
+
+.container__father__log__in {
+  //position: relative;
+
+
+
+  .container__children {
+    display: grid;
+    grid-template-columns: 1fr 600px;
+
+    .container__children__left {
+      img {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    @media screen and (max-width: 667px) {
+      display: block;
+      .container__children__left {
+        display: none;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      grid-template-columns: 1fr 400px;
+    }
+
+    .container__children__right {
+      background-color: #03dac6;
+      opacity: 0.9;
+      height: 100vh;
+      display: grid;
+      .container__children__right__text {
+        text-align: center;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+      }
+
+      .form__button {
+        text-align: center;
+        button {
+
+          font-weight: 600;
+          letter-spacing: .5px;
+          width: 70%;
+          border-radius: 15px;
+          color: #000000;
+          background-color: #23C479FF !important;
+        }
+      }
+
+
+      align-items: center;
+      .container__children__right__form {
+        padding: 0 1rem;
+      }
+
+
+    }
+    .form__reset__password {
+      margin-top: 1rem;
+      text-align: center;
+      button {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #FFFFFF;
+        &:hover {
+          color: #00dddd;
+
+        }
+      }
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  border-radius: 25px !important;
+}
+
+
+.register__google {
+  width: 100%;
+button {
+  background-color: #DB4437;
+  color: #FFFFFF;
+}
+}
+
+.type__register {
+
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    width: 100%;
+  }
+}
+
+.container__other__login {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  .container__other__login__left, .container__other__login__right {
+    width: 100%;
+  }
+}

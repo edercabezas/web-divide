@@ -1,0 +1,88 @@
+<div class="container__father__log__in">
+
+  <div class="container__children">
+    <div class="container__children__left">
+      <img src="./assets/auth/vi2.jpg" alt="">
+    </div>
+    <div class="container__children__right">
+      <div class="container__group">
+        <div class="container__children__right__img"></div>
+        <div class="container__children__right__text">
+          <h2> Registro de Usuario</h2>
+        </div>
+
+        <div class="container__children__right__form">
+          <form [formGroup]="registerUser" >
+
+          <div class="form__name">
+            <mat-form-field class="example-full-width" >
+              <mat-label>Nombre completo</mat-label>
+              <input matInput placeholder="Nombre completo" formControlName="userName">
+              <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form__name">
+            <mat-form-field class="example-full-width" >
+              <mat-label>Nombre Clave</mat-label>
+              <input matInput placeholder="Nombre Clave" formControlName="userSecret">
+              <mat-icon matSuffix>key</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form__user">
+            <mat-form-field class="example-full-width" >
+              <mat-label>Ingrese Correo/Celular</mat-label>
+              <input matInput placeholder="Ingrese Correo/Celular" formControlName="email">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form__password">
+            <mat-form-field class="example-full-width">
+              <mat-label>Ingrese su Contraseña</mat-label>
+              <input matInput placeholder="Ingrese su Contraseña" [type]="eyeDisable? 'password':  'text'" formControlName="password">
+              <mat-icon matSuffix
+                        (click)="eyeDisable =! eyeDisable">{{ eyeDisable ? 'visibility' : 'visibility_off' }}
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form__password">
+            <mat-form-field class="example-full-width">
+              <mat-label>Repetir Contraseña</mat-label>
+              <input matInput placeholder="Repetir Contraseña" [type]="eyeDisable? 'password':  'text'"  formControlName="password2">
+              <mat-icon matSuffix
+                        (click)="eyeDisable =! eyeDisable">{{ eyeDisable ? 'visibility' : 'visibility_off' }}
+              </mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form__button">
+            <button mat-flat-button class="btn btn-primary" (click)="register()">Registrate</button>
+          </div>
+
+
+
+            <div class="form__reset__password">
+              <button mat-button class="btn btn-primary" (click)="iniciar()">Iniciar sesión</button>
+            </div>
+
+            <div class="container__other__login">
+              <div class="container__other__login__left"><hr/></div>
+              <div class="container__other__login__center">Registrate</div>
+              <div class="container__other__login__right"><hr/></div>
+            </div>
+
+          <div class="type__register">
+             <div class="register__google">
+              <button mat-flat-button class="btn btn-primary" (click)="registerGoogle()">Google</button>
+            </div>
+
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

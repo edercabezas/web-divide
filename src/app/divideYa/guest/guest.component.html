@@ -1,0 +1,139 @@
+<!-- @if(!isAuthenticated || !guestData) {
+
+<div class="container__no__found">
+  <div class="container__no">
+    <h2>No tienes solicitud para unirte a un grupo</h2>
+
+    <button mat-button (click)="returDashboard()">
+      <mat-icon>back</mat-icon><span>Ver mis grupos</span>
+    </button>
+  </div>
+
+</div>
+} -->
+
+@if(isAuthenticated) {
+
+
+
+<div class="container__guest">
+
+  @if (guestData?.esMiembro) {
+  
+    <div class="container__init">
+    <div class="container__info__logo">
+        <div class="container__guest__title">
+          <h3>Hola, ya haces parte de este grupo puedes interactuar con los integrantes</h3>
+       </div>
+
+    </div>
+
+        <div class="container__add__group___init">
+          <button mat-flat-button (click)="memberDashboard()">
+            <mat-icon>add</mat-icon><span>Continuar</span>
+          </button>
+    </div>
+    </div>
+
+
+  } @else {
+      <div class="container__general">
+
+    <div class="container__info__logo">
+
+      <div class="container__logo__init">
+        <div class="container__guest__logo">
+          <h3>Hola, {{ guestData?.creadoPor}} <span>💪</span></h3>
+        </div>
+        <div class="container__guest__title">
+          <h3>Te invita a unirte a este Grupo</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container__card">
+
+      <mat-card>
+        <div class="container__card__item">
+          <div class="container__card__info__item">
+            <div class="container__card__info__item__children">
+              <div class="container__card__info__item__children__right">
+                <h3>{{ guestData?.nombreGrupo }}</h3>
+
+                <div class="div__date">
+                  <span>Creador: {{ guestData?.creadoPor }}</span>
+                </div>
+
+
+                <div class="div__date">
+                  <span>valor: {{ guestData?.totalAmount | currency}}</span>
+                </div>
+
+                <div class="div__date">
+                  <span>Fecha: {{ guestData?.createdAt}}</span>
+                </div>
+
+                <div class="div__people">
+                  <span>Participantes: {{ guestData?.miembros }}</span>
+                </div>
+                <div class="div__status">
+                  <span>Estado: Activo</span>
+                </div>
+
+                <hr />
+
+                <div class="container__text__info">
+                  <span>Quieres unirte a este grupo y dividir el valor entre todos los participantes?</span>
+                </div>
+
+                <div class="div__show">
+                  <div class="container__button__modal">
+
+                    <button mat-flat-button class="btn btn-success" type="button" (click)="registerNewMember(true)">
+                      <span>Aceptar</span>
+                    </button>
+
+                    <button mat-flat-button type="button" class="btn btn-secondary" (click)="noMemberGroup()">
+                      <span>Rechazar</span>
+                    </button>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+  }
+
+
+
+
+
+</div>
+
+} @else if (!isAuthenticated) {
+<div class="container__no__found">
+  <div class="container__no">
+    <h2>Para aceptar ingreso al grupo primero debes Autenticarte </h2>
+
+
+    <div class="container__add__group">
+      <button mat-flat-button (click)="login()">
+        <mat-icon>add</mat-icon><span>Iniciar Sesión</span>
+      </button>
+
+    </div>
+  </div>
+
+</div>
+}

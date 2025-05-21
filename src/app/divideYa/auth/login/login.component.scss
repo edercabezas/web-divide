@@ -1,0 +1,124 @@
+
+.container__father__log__in {
+  //position: relative;
+
+
+
+  .container__children {
+
+    mat-card {
+      background-color: #03dac6;
+      padding: 2rem;
+      width: 500px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+
+      @media (max-width: 600px){
+        height: 100vh;
+        border-radius: 0 !important;
+      }
+
+      border-radius: 15px;
+      opacity: 0.9;
+      display: grid;
+      .container__children__right__text {
+        text-align: center;
+        color: #FFFFFF;
+        letter-spacing: 1px;
+      }
+
+      .form__button {
+        text-align: center;
+        button {
+          color: #000000;
+          background-color: #23C479FF !important;
+          font-weight: 600;
+          letter-spacing: .5px;
+          width: 50%;
+          border-radius: 15px;
+        }
+      }
+
+
+      align-items: center;
+      .container__children__right__form {
+        padding: 0 1rem;
+      }
+
+
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh );
+
+    .form__reset__password {
+      margin-top: 1rem;
+      text-align: center;
+      button {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #FFFFFF;
+        &:hover {
+          color: #00dddd;
+
+        }
+      }
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  border-radius: 25px !important;
+}
+
+
+.register__google {
+  width: 60%;
+  button {
+    background-color: #DB4437;
+    color: #FFFFFF;
+  }
+}
+
+.type__register {
+
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  button {
+    width: 100%;
+  }
+}
+
+
+.container__other__login {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
+  .container__other__login__left, .container__other__login__right {
+    width: 100%;
+  }
+}
+
+.btn-secondary {
+
+  //font-size: 1.1rem !important;
+}
+
+
+
+.other__register {
+  width: 60%;
+  button {
+    background-color: #333333;
+    color: #FFFFFF;
+  }
+}

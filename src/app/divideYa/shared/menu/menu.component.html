@@ -1,0 +1,54 @@
+<cdk-accordion class="example-accordion">
+  <div class="container__action">
+    <div class="container__name__profile">
+      <div class="container__name">
+        <span>{{ dataStorage?.userSecret }}</span>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="container__sections">
+      <div class="container__close">
+        <div class="exit" (click)="logoutSection()">
+          <mat-icon matSuffix>logout</mat-icon><span>Cerrar sesión</span>
+        </div>
+
+        <div class="notifications" >
+          <mat-icon matSuffix>notifications</mat-icon><span>Notificaciones</span>
+        </div>
+
+        <div class="notifications" (click)="redirectProfile()" >
+          <mat-icon matSuffix>account_circle</mat-icon><span>Mi perfil</span>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4">
+  </div>
+  @for (item of menu; track item; let index = $index) {
+    <cdk-accordion-item #accordionItem="cdkAccordionItem"
+                        [attr.aria-controls]="'accordion-body-' + index"
+                        [attr.aria-expanded]="accordionItem.expanded"
+                        [attr.id]="'accordion-header-' + index"
+                        class="example-accordion-item"
+                        role="button"
+                        tabindex="0">
+      <div
+        (click)="selectOption(item.router)"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="example-accordion-item-header">
+
+       <mat-icon>{{ item.icon}}</mat-icon> {{ item.name }}
+      </div>
+
+
+
+    </cdk-accordion-item>
+  }
+
+</cdk-accordion>
+
+@if (spinnerShow) {
+<div class="container__spiner">
+  <app-spiner [title]="'Un momento estamos cargando su información'"></app-spiner>
+</div>
+}

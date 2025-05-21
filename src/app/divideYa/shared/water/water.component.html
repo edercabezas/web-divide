@@ -1,0 +1,122 @@
+@if(detailNewDay && detailNewDay.length > 0) {
+  <div class="container__clima">
+
+
+      <div class="container__water_now">
+
+        <mat-card>
+          <div class="container__info">
+
+            
+
+              @if(city) {
+                <div class="container__city" >
+                  <span> {{ city }}, </span>
+                </div>
+              }
+
+              @if(country) {
+                <div class="container__country">
+                  <span>{{ country}},</span>
+                </div>
+              }
+
+
+            @if(detailNow.date) {
+              <div class="container__city" >
+                <span> {{ detailNow.date | dayDate}} </span>
+              </div>
+            }
+
+          </div>
+          <div class="container__card__children">
+            <div class="container__card__children__left">
+              <div class="img">
+                <img [src]="returnImg(detailNow.weather)" alt="">
+              </div>
+            </div>
+            <div class="container__card__children__right">
+              <div class="container__grados">
+                <span> {{ detailNow.temp2m.max }} °C</span> -
+                <span>Minimo: {{ detailNow.temp2m.min }} °C</span>
+              </div>
+
+              <div class="day__now">
+                <span>{{ detailNow.weather | stateDay}}</span>
+
+
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+<!--            <mat-card class="mat-card-two">-->
+
+<!--              <div class="container__card">-->
+
+<!--                <div class="container__img">-->
+<!--                  <div class="img">-->
+<!--                    <img [src]="returnImg(detailNow.weather)" alt="">-->
+<!--                  </div>-->
+
+<!--                </div>-->
+
+<!--                <div class="container__grados">-->
+<!--                  <h1> {{ detailNow.temp2m.max }} °C</h1>-->
+<!--                  <h1>Minimo: {{ detailNow.temp2m.min }}</h1>-->
+<!--                </div>-->
+
+<!--                <div class="day__now">-->
+<!--                  <h2>{{ detailNow.weather | stateDay}}</h2>-->
+<!--                  <h2>{{ detailNow.date | dayDate}}</h2>-->
+
+<!--                </div>-->
+
+
+<!--              </div>-->
+
+
+<!--            </mat-card>-->
+
+
+
+<!--              <mat-card class="mat-card-two">-->
+<!--              @for(items of detailNewDay; track items) {-->
+<!--                <div class="container__card" >-->
+
+<!--                    <div class="container__card_new_day">-->
+<!--                      <div class="container__img">-->
+
+<!--                        <div class="img">-->
+<!--                           <img [src]="returnImg(items.weather)" alt="">-->
+<!--                        </div>-->
+
+<!--                      </div>-->
+
+<!--                      <div class="container__grados">-->
+<!--                        <h1> {{ items.temp2m.max }} °C</h1>-->
+<!--                        <h1>Minimo: {{ items.temp2m.min }}</h1>-->
+<!--                      </div>-->
+
+
+<!--                      <div class="day__now">-->
+<!--                        <h2>{{ items.weather | stateDay}}</h2>-->
+<!--                        <h2>{{ items.date | dayDate}}</h2>-->
+
+<!--                      </div>-->
+<!--                    </div>-->
+
+
+
+<!--                </div>-->
+<!--              }-->
+<!--              </mat-card>-->
+        </div>
+
+  </div>
+}
+
+
+
+
+

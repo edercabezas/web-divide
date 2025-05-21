@@ -1,0 +1,38 @@
+<div class="container__list__chat">
+
+  <!-- Botón solo visible en móviles para mostrar el menú lateral -->
+   @if (isMobile) {
+    <button class="btn-toggle-chat-list" (click)="toggleGroupList()">
+    <mat-icon>{{showGroupList ? 'arrow_back_ios_new' : 'arrow_forward_ios'}}</mat-icon>
+  </button>
+   }
+  
+
+  <div class="container__separator__section" [class.show-group]="showGroupList">
+
+    <!-- Sidebar de chats -->
+    <div class="containeer__lisct__chat mobile-slide" [class.active]="showGroupList">
+      <app-group-chat (returCodeGroup)="getCodeGroup($event)" (closeMenu)="toggleGroupList()"></app-group-chat>
+    </div>
+
+    <!-- Chat principal -->
+    <div class="container__componet__chat">
+      @if(setGroupID) {
+        <app-chat-shared [groupChatID]="setGroupID" 
+          (closeChat)="closeChat()"
+          (openGroupList)="toggleGroupList(true)">
+        </app-chat-shared>
+      } @else {
+        anuncio publicitario
+      }
+    </div>
+
+    <!-- Publicidad lateral -->
+     @if (!isMobile) {
+  <div class="container__anuncio__chat" >
+      <app-side-advertising></app-side-advertising>
+    </div>
+     }
+  
+  </div>
+</div>

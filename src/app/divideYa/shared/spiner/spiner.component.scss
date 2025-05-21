@@ -1,0 +1,41 @@
+
+.container-float-page {
+  right: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111010;
+  opacity: 0.9;
+  z-index: 7000;
+
+  .container__center {
+    display: flex;
+    justify-content: center;
+  }
+  .contaner-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    // left: 45%;
+  }
+  .container-loader {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+mat-spinner {
+  text-align: -webkit-center !important;
+}
+
+.container-text {
+   color: #9ed08d;
+   font-weight: 500;
+   font-size: 1.2rem;
+   letter-spacing: .5px;
+}

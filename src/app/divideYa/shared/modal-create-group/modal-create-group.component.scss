@@ -1,0 +1,40 @@
+
+.container__general {
+  padding: 1rem;
+  height: -webkit-fill-available;
+
+}
+.container__button__modal {
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  .btn-secondary {
+    background-color: #d0cece;
+    color: black;
+  }
+  .btn-success {
+    background-color: #27cc79;
+    color: #000000;
+  }
+}
+
+
+mat-form-field {
+  width: 100%;
+  border-radius: 25px !important;
+}
+
+.container__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  span {
+    font-weight: bold;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+}

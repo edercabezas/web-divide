@@ -1,0 +1,20 @@
+<div class="container__chat">
+  <div class="container__chat__options">
+    @for (item of dataGroupList; track $index) {
+      <div
+        class="chat"
+        (click)="createRouter(item?.id)"
+        [ngClass]="item.id === groupChatID ? 'selected' : ''"
+      >
+        <div class="chat__left">
+          <mat-icon class="chat__icon">group</mat-icon>
+          <div class="info__group">
+            <div class="group__name">{{ item?.name }}</div>
+            <div class="group__members">Integrantes: {{ item?.memberCount }}</div>
+          </div>
+        </div>
+        <mat-icon class="arrow__icon">arrow_forward_ios</mat-icon>
+      </div>
+    }
+  </div>
+</div>

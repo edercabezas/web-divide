@@ -1,0 +1,77 @@
+<div class="container__father__log__in">
+
+  <div class="container__children">
+
+    <mat-card>
+      <div class="container__children__right">
+        <div class="container__group">
+          <div class="container__children__right__img"></div>
+          <div class="container__children__right__text">
+            <h2> Iniciar Sesión</h2>
+          </div>
+
+          <div class="container__children__right__form">
+            <form [formGroup]="loginUser">
+              <div class="form__user">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Ingrese su Correo</mat-label>
+                  <input matInput placeholder="Ingrese su Correo" formControlName="email">
+                  <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+              </div>
+              <div class="form__password">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Ingrese su Contraseña</mat-label>
+                  <input matInput placeholder="Ingrese su Contraseña" [type]="eyeDisable? 'password':  'text'"
+                    formControlName="password">
+                  <mat-icon matSuffix (click)="eyeDisable =! eyeDisable">{{ eyeDisable ? 'visibility' : 'visibility_off'
+                    }}
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </form>
+
+            <div class="form__button">
+              <button mat-flat-button class="btn btn-primary " (click)="login()">Ingresar</button>
+            </div>
+
+
+
+            <div class="form__reset__password">
+              <button mat-button class="btn btn-primary" routerLink="/cambiar-clave">Cambiar clave</button>
+            </div>
+
+            <div class="container__other__login">
+              <div class="container__other__login__left">
+                <hr />
+              </div>
+              <div class="container__other__login__center">Registrate</div>
+              <div class="container__other__login__right">
+                <hr />
+              </div>
+            </div>
+
+            <div class="type__register">
+              <div class="other__register">
+                <button mat-flat-button class="btn btn-secondary" (click)="registerOther()">Normal</button>
+              </div>
+
+              <div class="register__google">
+                <button mat-flat-button class="btn btn-primary">Google</button>
+              </div>
+
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="profile-container">
+    <div class="profile-body">
+        <aside class="profile-side left">Anuncio izquierda</aside>
+
+        <main class="profile-main">
+            <h3>Actualización de datos</h3>
+            <mat-card>
+                <form [formGroup]="dataUser" class="profile-form">
+
+                    <div class="photo-section" (click)="selectPhoto()">
+                        <div class="photo-preview">
+                            <p>Seleccione una foto de Perfil</p>
+                        </div>
+                        <input type="file" id="upload-product" (change)="upload($event)" accept=".png, .jpg, .jpeg"
+                            hidden />
+                    </div>
+
+                    <div class="form-grid">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombre Completo</mat-label>
+                            <input matInput formControlName="userName">
+                            <mat-icon matSuffix>account_circle</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombre de usuario</mat-label>
+                            <input matInput formControlName="userSecret">
+                            <mat-icon matSuffix>key</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número de Celular</mat-label>
+                            <input matInput formControlName="phone">
+                            <mat-icon matSuffix>phone</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Correo Electrónico</mat-label>
+                            <input matInput formControlName="email">
+                            <mat-icon matSuffix>email</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput [type]="eyeDisable ? 'password' : 'text'" formControlName="password">
+                            <mat-icon matSuffix (click)="eyeDisable = !eyeDisable">
+                                {{ eyeDisable ? 'visibility' : 'visibility_off' }}
+                            </mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Repita su Contraseña</mat-label>
+                            <input matInput [type]="eyeDisable ? 'password' : 'text'" formControlName="password2">
+                            <mat-icon matSuffix (click)="eyeDisable = !eyeDisable">
+                                {{ eyeDisable ? 'visibility' : 'visibility_off' }}
+                            </mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>País</mat-label>
+                            <input matInput formControlName="country">
+                            <mat-icon matSuffix>south_america</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ciudad</mat-label>
+                            <input matInput formControlName="city">
+                            <mat-icon matSuffix>location_city</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-actions">
+                        <button mat-flat-button color="primary" type="button" (click)="updateUSer()">Guardar</button>
+                        <button mat-flat-button type="button" class="btn-secondary">Cancelar</button>
+                    </div>
+
+                </form>
+            </mat-card>
+        </main>
+
+        <aside class="profile-side right">Anuncio derecha</aside>
+    </div>
+</div>

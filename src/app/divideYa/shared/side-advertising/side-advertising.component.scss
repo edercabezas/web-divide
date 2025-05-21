@@ -1,0 +1,56 @@
+.layout-container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding-right: 250px; // espacio reservado para la columna del anuncio
+}
+
+.ad-sidebar {
+  width: 100%;
+//   position: fixed;
+  right: 0;
+  top: 0;
+  height: calc(100vh - 69px); // altura total de la pantalla
+  background-color: #ffffff;
+  border-left: 1px solid #ddd;
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+
+  @media (max-width: 768px) {
+    display: none; // Oculta en dispositivos móviles
+  }
+}
+
+.ad-full-height {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+
+  .ad-label {
+    font-size: 0.85rem;
+    color: gray;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .ad-link {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #1976d2;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,149 @@
+.example-accordion {
+  display: block;
+  max-width: 500px;
+  padding: 0 1rem;
+
+}
+
+.example-accordion-item {
+  display: block;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+
+.example-accordion-item + .example-accordion-item {
+  border-top: none;
+}
+
+.example-accordion-item-header {
+  display: flex;
+  align-content: center;
+  justify-content: left;
+  color: #FFFFFF !important;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 1px;
+  gap: 10px;
+}
+
+.example-accordion-item-description {
+  font-size: 0.85em;
+  color: #999;
+}
+
+.example-accordion-item-header,
+.example-accordion-item-body {
+  padding: 16px;
+}
+
+.example-accordion-item-header:hover {
+  cursor: pointer;
+}
+
+.example-accordion-item:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+
+.container-options {
+  height: 30px;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px !important;
+  letter-spacing: 1px !important;
+}
+
+
+cdk-accordion-item {
+  color: #d2cdcd;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+
+
+
+.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+
+.container__name__profile {
+  //border-bottom: 1px #999999 dashed;
+  padding-left: 1rem;
+  margin-bottom: .5rem;
+  text-align: start;
+
+  .container__name {
+    padding: 2rem .5rem .5rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    span {
+      letter-spacing: .5px;
+      font-weight: 500;
+      text-transform: capitalize;
+      color: #FFFFFF;
+      gap: .6rem;
+      font-size: 1.6rem;
+      line-height: 26px;
+
+    }
+  }
+  .container__profile {
+    padding: .2rem;
+
+    span {
+      font-size: 1rem;
+      letter-spacing: .5px;
+      font-weight: 400;
+      color: #d2cdcd;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.notifications {
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: .7rem;
+  color: #FFFFFF;
+  gap: .6rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: .5px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+    border-radius: .5rem;
+  }
+}
+
+.exit {
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: .7rem;
+  color: #FFFFFF;
+  gap: .6rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: .5px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+    border-radius: .5rem;
+  }
+}

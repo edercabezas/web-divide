@@ -1,0 +1,34 @@
+<mat-drawer-container autosize class="container-drawer-principal">
+  <app-header (returnInformation)="getStatusHeader()"></app-header>
+
+  <mat-drawer #drawer [opened]="status" class="w-64 p-4 bg-gray-100 container-drawer" mode="side">
+    <div class="container-drawer__options">
+      <div class="container-title">
+        <div class="container__presentation">
+          <div class="container__presentation__left">
+            <div class="container__header__menu">
+              <button (click)="disguiseMenu()" mat-button type="button">
+                <mat-icon>menu</mat-icon>
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <app-menu (closeMenu)="optionClickMenu($event)" ></app-menu>
+    </div>
+
+    <!--    <div class="container-drawer__footer">-->
+
+    <!--      <a *ngFor="let item of SOCIAL_MEDIA_ICONS" [href]="item.route">-->
+    <!--        <img [src]="item.icon" [alt]="item.title" [title]="item.title" [srcset]="item.icon">-->
+    <!--      </a>-->
+    <!--    </div>-->
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

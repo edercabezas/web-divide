@@ -1,0 +1,29 @@
+// Definir colores principales
+$primary-color: #6200ea; // Color principal (Botones, enlaces)
+$accent-color: #03dac6;  // Color secundario
+$background-color: #f5f5f5; // Color de fondo
+$text-color: #333333; // Color de texto principal
+
+// Definir colores para fondos
+$card-background: #ffffff;  // Fondo de tarjetas
+$menu-background: #121212;  // Fondo del menú lateral
+$button-color: #ffffff;  // Color de texto de los botones
+
+// Tipografía
+$font-family: 'Roboto', sans-serif;
+$font-size-base: 16px;
+$font-size-heading: 24px;
+
+// Otros estilos globales
+$border-radius: 8px;
+
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  /* background-color: var(--mdc-filled-text-field-container-color, var(--mat-sys-surface-variant)); */
+  background-color: transparent !important;
+}
+
+
+mat-drawer-content{
+  background-color: #efefef !important;
+}

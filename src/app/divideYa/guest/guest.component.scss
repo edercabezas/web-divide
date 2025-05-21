@@ -1,0 +1,75 @@
+
+.container__card {
+
+  padding: 1rem;
+  mat-card {
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+
+    .container__text__info {
+      padding: .7rem;
+    }
+    .container__button__modal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      .btn-secondary {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border-radius: 5px !important;
+        border: solid 1px #000000 !important;
+        font-size: 1.1rem !important;
+      }
+      .btn-success{
+        background-color: #23C479FF !important;
+        border-radius: 5px !important;
+        font-size: 1.1rem !important;
+      }
+
+    }
+  }
+
+}
+
+
+span {
+  font-size: 1.1rem !important;
+}
+
+
+.container__info__logo {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.container__no__found {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 5rem;
+  height: 100vh;
+}
+
+.container__guest {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container__add__group___init {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    width: 100%;
+  }
+}

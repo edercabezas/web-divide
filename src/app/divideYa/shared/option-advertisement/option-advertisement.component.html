@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>¡Ayúdanos a seguir creciendo!</h2>
+<mat-dialog-content>
+  <p>Has alcanzado el límite de grupos gratuitos. Para seguir creando más grupos, por favor mira este anuncio.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    
+  <div class="container__button__modal">
+    <button mat-flat-button type="button" class="btn btn-secondary" (click)="cancelar()">
+      <span>Cancelar</span>
+    </button>
+    <button mat-flat-button class="btn btn-success" type="button" (click)="verAnuncio()">
+      <span>Aceptar</span>
+    </button>
+  </div>
+</mat-dialog-actions>

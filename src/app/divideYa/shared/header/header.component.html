@@ -1,0 +1,22 @@
+<mat-toolbar ngSkipHydration>
+
+  <button (click)="setDataFather()" mat-button type="button">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="example-spacer"></span>
+
+  <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" mat-icon-button>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <div class="container-option">
+    <mat-menu #menu="matMenu">
+      <button (click)="logoutSection()" mat-menu-item>
+        <mat-icon>settings_power</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+

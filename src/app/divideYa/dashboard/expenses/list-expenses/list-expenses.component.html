@@ -1,0 +1,98 @@
+<div class="container__expense">
+  <div class="container__expense__card">
+    <div class="container__header">
+      <div class="container__back">
+        <app-button-back />
+      </div>
+      <div class="container__shared">
+        <img src="assets/group/shared-50.svg" alt="" (click)="shareGroup(dataExpenses)">
+      </div>
+    </div>
+
+    <mat-card>
+      <div class="container__name__group">
+        <h3>Actualización del Gasto</h3>
+      </div>
+
+      <div class="container__total__amount">
+        <span>Valor acordado </span>
+        <h3>{{dataExpenses?.totalAmount | currency}}</h3>
+      </div>
+
+      <div class="container__members">
+        <span>Integrantes </span>
+        <h3>{{dataExpenses?.miembros}}</h3>
+      </div>
+
+      <div class="container__value__members">
+        <span>Valor por persona </span>
+        <h3>{{ +dataExpenses?.totalAmount / +dataExpenses?.miembros | currency}}</h3>
+      </div>
+
+      <div class="container__members_pay">
+        <span>Consignado</span>
+        <h3>{{ numberFinish }}</h3>
+      </div>
+      
+      <div class="container__description">
+        <span>Descripción</span>
+        <h3> {{ dataExpenses?.descripcion}}</h3>
+      </div>
+
+    </mat-card>
+    <span>Dividir entre</span>
+    <mat-card>
+
+      <div class="container__check__members">
+        <div class="container__check__members__header">
+          <div class="container__creator">
+            <span>Tu, {{ dataExpenses?.userID !== dataStorage?.userID ? 'Invitado': 'Admin'}}</span>
+          </div>
+          <div class="container__button">
+            <button mat-flat-button type="button" class="btn btn-success">
+              <span>Marcar como pagado</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container__divide__entre">
+
+        @for (item of dataExpenses?.miembrosDetalle; track item; let i = $index) {
+        <div class="container__checkbox">
+        
+          <mat-checkbox class="large-checkbox" [(ngModel)]="item.payGroup"
+            [disabled]="dataExpenses.userID !== dataStorage.userID" (change)="checkData(item)">
+            <div class="container__status">
+              <span>{{ item.userName }}</span>
+            </div>
+          </mat-checkbox>
+          <span>{{ item.payGroup ? 'Pagado' : 'Pendiente'}}</span>
+         
+        </div>
+        }
+
+      </div>
+    </mat-card>
+
+       <div class="container__button__group">
+        <div class="container__button__history">
+          <button mat-flat-button type="button" class="btn btn-success">
+            <span>Ver historial</span>
+          </button>
+        </div>
+
+         <div class="container__button__close__group">
+          <button mat-flat-button type="button" class="btn btn-success">
+            <span>Cerrar grupo</span>
+          </button>
+        </div>
+
+      </div>
+  </div>
+</div>
+
+@if (spinnerShow) {
+<div class="container__spiner">
+  <app-spiner [title]="'Un momento estamos cargando su información'"></app-spiner>
+</div>
+}

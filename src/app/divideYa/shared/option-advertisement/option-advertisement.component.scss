@@ -1,0 +1,27 @@
+
+.container__button__modal {
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  .btn-secondary {
+    background-color: #d0cece;
+    color: black;
+  }
+  .btn-success {
+    background-color: #27cc79;
+    color: #000000;
+  }
+}
+
+
+mat-dialog-content {
+  font-size: 1rem;
+  padding: 1rem 0;
+}
+
+mat-dialog-actions {
+  margin-top: 1rem;
+}
