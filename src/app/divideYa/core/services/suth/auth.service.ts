@@ -8,7 +8,8 @@ import {
   getAuth
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { updateEmail, updatePassword } from 'firebase/auth';
+import { EmailAuthProvider, reauthenticateWithCredential, updateEmail, updatePassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 
 
 
@@ -28,21 +29,71 @@ export class AuthService {
   async createUser(route: string, data: any): Promise<any> {
 
     console.log(route, data)
-    const userCredential = await createUserWithEmailAndPassword(this.auth, data.email, data.password);
 
-    const uid = userCredential.user.uid;
-    await setDoc(doc(this.firestore, 'users', uid), {
-      uid,
-      ...data,
-    });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, data.email, data.password);
+      const uid = userCredential.user.uid;
+      await setDoc(doc(this.firestore, 'users', uid), {
+        uid,
+        ...data,
+      });
+      if (userCredential && userCredential.user) {
 
-    return userCredential;
+        return { status: true, message: 'Usuario creado exitosamente' };
+      } else {
+
+        return { status: false, message: 'No se pudo crear el usuario.' };
+      }
+
+    } catch (error) {
+      const firebaseError = error as FirebaseError;
+
+      switch (firebaseError.code) {
+        case 'auth/email-already-in-use':
+          return {
+            status: false,
+            message: 'El correo ya está registrado.'
+          };
+        case 'auth/invalid-email':
+          return {
+            message: 'El correo ingresado no es válido.',
+            status: false
+          };
+        case 'auth/weak-password':
+          return {
+            message: 'La contraseña es demasiado débil. Usa al menos 6 caracteres.',
+            status: false
+          };
+        default:
+          return {
+            message: 'Ocurrió un error al registrar el usuario.',
+            status: false
+          };
+      }
+    }
+
+
+
+
+
+
+    // return userCredential;
   }
 
 
 
   async login(data: any) {
-    return await signInWithEmailAndPassword(this.auth, data.email, data.password);
+
+
+    try {
+      return await signInWithEmailAndPassword(this.auth, data.email, data.password);
+
+    } catch (error) {
+      return {
+        status: false
+      }
+    }
+
   }
 
   async logout() {
@@ -70,9 +121,18 @@ export class AuthService {
   }
 
 
+  async reauthenticateUser(currentEmail: string, currentPassword: string) {
+    const user = this.auth.currentUser;
+    if (!user) throw new Error('Usuario no autenticado');
+
+    const credential = EmailAuthProvider.credential(currentEmail, currentPassword);
+
+    await reauthenticateWithCredential(user, credential);
+  }
+
+
   async updateUser(userId: string, data: any) {
     const user = this.auth.currentUser;
-
     if (!user || user.uid !== userId) throw new Error('No autorizado');
 
     if (data.email && data.email !== user.email) {
@@ -84,19 +144,14 @@ export class AuthService {
     }
 
     const userRef = doc(this.firestore, 'users', user.uid);
+
     const {
-      userName,
       password,
-      userSecret,
-      email,
-      phone,
-      photo,
       password2,
-      country,
-      city,
-      birthDate,
+      email,
       ...firestoreData
     } = data;
+
     await updateDoc(userRef, firestoreData);
   }
 

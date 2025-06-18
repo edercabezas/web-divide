@@ -1,8 +1,11 @@
 <mat-toolbar ngSkipHydration>
 
-  <button (click)="setDataFather()" mat-button type="button">
+  <div class="container__logo">
+    <img src="assets/logo/logo2.png" alt="">
+  </div>
+  <!-- <button (click)="setDataFather()" mat-button type="button">
     <mat-icon>menu</mat-icon>
-  </button>
+  </button> -->
 
   <span class="example-spacer"></span>
 
@@ -12,6 +15,27 @@
 
   <div class="container-option">
     <mat-menu #menu="matMenu">
+
+       <button (click)="profileUser()" mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+
+      <button (click)="setNotification()" mat-menu-item>
+        <mat-icon>notifications</mat-icon>
+        <span>Notificaciones</span>
+      </button>
+
+      <button (click)="statistics()" mat-menu-item>
+        <mat-icon>trending_up</mat-icon>
+        <span>Estadisticas</span>
+      </button>
+
+      <!-- <button (click)="logoutSection()" mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Configuración</span>
+      </button> -->
+
       <button (click)="logoutSection()" mat-menu-item>
         <mat-icon>settings_power</mat-icon>
         <span>Cerrar sesión</span>
@@ -20,3 +44,10 @@
   </div>
 </mat-toolbar>
 
+
+
+@if (spinnerShow) {
+<div class="container__spiner">
+  <app-spiner [title]="'Un momento estamos cargando su información'"></app-spiner>
+</div>
+}

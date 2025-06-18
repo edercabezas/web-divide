@@ -1,12 +1,15 @@
 
 .container__father__log__in {
-  //position: relative;
+   background: linear-gradient(135deg, #1B1B3A, #2E86AB);
 
 
 
   .container__children {
-    display: grid;
-    grid-template-columns: 1fr 600px;
+    // display: grid;
+    // grid-template-columns: 1fr 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .container__children__left {
       img {
@@ -28,10 +31,12 @@
     }
 
     .container__children__right {
-      background-color: #03dac6;
+      padding: 1rem;
+         background: linear-gradient(135deg, #1B1B3A, #2E86AB);
       opacity: 0.9;
       height: 100vh;
       display: grid;
+      color: #000000;
       .container__children__right__text {
         text-align: center;
         color: #FFFFFF;
@@ -46,7 +51,7 @@
           letter-spacing: .5px;
           width: 70%;
           border-radius: 15px;
-          color: #000000;
+          color: #FFFFFF;
           background-color: #23C479FF !important;
         }
       }
@@ -80,6 +85,9 @@ mat-form-field {
   border-radius: 25px !important;
 }
 
+mat-label {
+  color: #000000 !important;
+}
 
 .register__google {
   width: 100%;
@@ -111,4 +119,26 @@ button {
   .container__other__login__left, .container__other__login__right {
     width: 100%;
   }
+}
+
+
+
+.other__register {
+  width: 100%;
+  button {
+    background-color: #333333;
+    color: #FFFFFF;
+  }
+}
+
+mat-card {
+   background-color: #ffffff;
+      padding: 2rem;
+      width: 100%;
+      border-radius: 20px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  color: #000000;
 }

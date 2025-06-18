@@ -1,0 +1,23 @@
+<div class="modal-container">
+  <h2 class="modal-title">🎁 Mira y gana puntos</h2>
+
+  <video
+    class="video-player"
+    [src]="data.url"
+    controls
+    playsinline
+    preload="metadata"
+  ></video>
+
+  <div class="video-info">
+    <h3>{{ data.title }}</h3>
+    <p>{{ data.description }}</p>
+  </div>
+
+  <div class="modal-actions">
+    <button mat-flat-button color="primary" (click)="claimPoints()">
+      Reclamar puntos
+    </button>
+    <button mat-button mat-dialog-close>Cerrar</button>
+  </div>
+</div>

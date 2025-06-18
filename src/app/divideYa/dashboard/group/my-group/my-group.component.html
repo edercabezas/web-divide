@@ -1,12 +1,16 @@
+
 <div class="container__group">
   <div class="container__group__item">
     <div class="container__header">
 
-      <div class="container__anuncio"></div>
+      <div class="container__anuncio">
+        <!-- //3355327002 -->
+        <!-- <app-google-adsense [adSlot]="'1173761076'"></app-google-adsense> -->
+      </div>
       <!-- <h3>Hola, {{ dataStorage?.userName }} <span>💪</span></h3> -->
       <button mat-flat-button color="primary" (click)="openDialogPass()">
         <mat-icon>add</mat-icon>
-        <span>Crear nuevo grupo</span>
+        <span>Crear presupuesto</span>
       </button>
     </div>
 
@@ -22,13 +26,9 @@
         <mat-card>
           <div class="card-content">
             <h3>{{ group?.name }}</h3>
-            <p><strong>Creador:</strong> {{ group?.creador }}</p>
-            <p><strong>Gastos:</strong> {{ group?.totalAmount | currency }}</p>
-            <p><strong>Fecha:</strong> {{ group?.createdAt }}</p>
-            <p><strong>Participantes:</strong> {{ group?.memberCount }}</p>
-            <p><strong>Por persona:</strong> {{ group?.totalAmount / group?.memberCount | currency }}</p>
-            <p><strong>Rol:</strong> {{ group?.role }}</p>
-            <p><strong>Estado:</strong> Activo</p>
+            <p><strong>Creador:</strong> <span>{{ group?.creador }}</span></p>
+            <p><strong>Presupuesto:</strong> <span>{{ group?.totalAmount  / group?.memberCount| currency }}</span></p>
+            <p><strong>Rol:</strong> <span>{{ group?.role }}</span></p>
 
             <div class="card-actions">
               @if ((group?.createdBy === dataStorage?.userID) || (group.privilege === false)) {
@@ -48,7 +48,7 @@
       }
     </div>
   </div>
-  <app-add-group></app-add-group>
+  <!-- <app-add-group></app-add-group> -->
 </div>
 
 @if (spinnerShow) {

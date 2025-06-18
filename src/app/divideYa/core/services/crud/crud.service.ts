@@ -252,77 +252,6 @@ export class CrudService {
   }
 
 
-  async getReadExpense(groupID: string): Promise<any> {
-    // 1. Buscar grupo por token
-    const groupRef: any = collection(this.firestore, 'group');
-    const groupQuery: any = query(groupRef, where('groupID', '==', groupID));
-    const groupSnapshot: any = await getDocs(groupQuery);
-
-    if (groupSnapshot.empty) {
-      console.error('Grupo no encontrado con el token');
-      return null;
-    }
-
-    const groupDoc: any = groupSnapshot.docs[0];
-    const groupData = groupDoc.data();
-    const groupId: any = groupDoc.id;
-    const creatorId = groupData['createdBy'];
-
-    // 2. Traer datos del creador del grupo
-    const creatorRef: any = collection(this.firestore, 'users');
-    const creatorQuery: any = query(creatorRef, where('userID', '==', creatorId));
-    const creatorSnapshot: any = await getDocs(creatorQuery);
-    const creatorData: any = creatorSnapshot.docs[0]?.data();
-
-    // 3. Traer miembros del grupo
-    const membersRef: any = collection(this.firestore, 'group_members');
-    const membersQuery: any = query(membersRef, where('groupId', '==', groupId));
-    const membersSnapshot: any = await getDocs(membersQuery);
-    const membersCount: any = membersSnapshot.size;
-    const colection: any = membersSnapshot.docs[0]?.id;
-    
-
-    // 4. Obtener información de cada miembro incluyendo su nombre de `users`
-    const memberDetails = await Promise.all(membersSnapshot.docs.map(async (doc: any) => {
-      const colection: any = doc.id;
-      const member: any = doc.data();
-      const userId = member.userId;
-
-      // Buscar el usuario por su userId
-      const userQuery: any = query(collection(this.firestore, 'users'), where('userID', '==', userId));
-      const userSnapshot: any = await getDocs(userQuery);
-      const userData: any = userSnapshot.docs[0]?.data();
-
-      return {
-        memberID: member.memberID,
-        colection,
-        userId,
-        userName: userData?.userName ?? 'Invitado sin nombre',
-        joinedAt: member.joinedAt,
-        payGroup: member.payGroup,
-      };
-    }));
-
-    // 5. Calcular aporte por persona
-    const valorTotal = groupData['totalAmount'];
-    const aportePorPersona = valorTotal / membersCount;
-
-    // 6. Retornar objeto completo
-    return {
-
-      name: groupData['group'],
-      userID: groupData['createdBy'],
-      groupID: groupData['groupID'],
-      descripcion: groupData['description'],
-      createdAt: groupData['createdAt'],
-      totalAmount: valorTotal,
-      miembros: membersCount,
-      inviteToken: groupData['inviteToken'],
-      aportePorPersona,
-      creadoPor: creatorData?.userName ?? 'Desconocido',
-      miembrosDetalle: memberDetails
-    };
-  }
 
   //createMessage, getMessages, getGroupChat yes
   async createMessage(data: any): Promise<any> {
@@ -416,27 +345,5 @@ export class CrudService {
 
   }
 
-
-
-  async updateExpense(statu: boolean, code: string): Promise<any> {
-
-
-
-    const docRef = doc(this.firestore, `group_members/${code}`); 
-
-   return updateDoc(docRef, {
-      payGroup: statu
-    }).then(() => {
-      return {
-        statu: true,
-        message: 'El Registro fue modificado exitosamente'
-      }
-    }).catch((error) => {
-      return {
-        statu: false,
-        message: 'Error al actualizar'
-      }
-    });
-  }
 
 }

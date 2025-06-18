@@ -1,0 +1,33 @@
+<div class="container__general">
+    <h2 mat-dialog-title>{{ data.groupName }}</h2>
+
+    <div class="modal-header">
+        <span class="initial-amount">💰 Valor Inicial: {{ data.initialAmount | currency }}</span>
+    </div>
+
+    <div class="expenses-list">
+
+
+
+
+        @for (item of data.expenses; track $index) {
+        <mat-card class="expense-card">
+            <mat-card-title>{{ item.inputExpense }}</mat-card-title>
+            <mat-card-content>
+                <div class="details">
+                    <span class="amount">💸 {{ item.inputValue | currency }}</span>
+                    <span class="date">🗓 {{ returDate(item.timestamp) |  date:'mediumDate' }}</span>
+                    <span class="added-by">👤 {{ item.userName }}</span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        }
+    <div class="container__total">
+         <span>Total gastos: </span> <strong> {{ data.totalValue | currency }}</strong>
+    </div>
+    </div>
+
+    <div mat-dialog-actions align="end" class="button__back">
+        <button mat-flat-button type="button" class="btn btn-secondary"  (click)="dialogRef.close()">Cerrar</button>
+    </div>
+</div>

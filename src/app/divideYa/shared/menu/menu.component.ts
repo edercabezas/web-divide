@@ -61,6 +61,11 @@ export class MenuComponent implements OnInit{
         router: '/dashboard/chats'
       },
       {
+        name: 'Ganar',
+        icon: 'pay',
+        router: ''
+      },
+      {
         name: 'Configuración',
         icon: 'settings',
         router: ''
@@ -77,7 +82,6 @@ export class MenuComponent implements OnInit{
       this.spinnerShow = false;
     }, 1000)
 
-   
   }
 
 

@@ -3,11 +3,12 @@
         <aside class="profile-side left">Anuncio izquierda</aside>
 
         <main class="profile-main">
+              <!-- <app-google-adsense [adSlot]="'1173761076'"></app-google-adsense> -->
             <h3>Actualización de datos</h3>
             <mat-card>
                 <form [formGroup]="dataUser" class="profile-form">
 
-                    <div class="photo-section" (click)="selectPhoto()">
+                     <div class="photo-section" (click)="selectPhoto()">
                         <div class="photo-preview">
                             <p>Seleccione una foto de Perfil</p>
                         </div>
@@ -71,7 +72,7 @@
 
                     <div class="form-actions">
                         <button mat-flat-button color="primary" type="button" (click)="updateUSer()">Guardar</button>
-                        <button mat-flat-button type="button" class="btn-secondary">Cancelar</button>
+                        <!-- <button mat-flat-button type="button" class="btn-secondary">Cancelar</button> -->
                     </div>
 
                 </form>

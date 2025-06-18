@@ -1,7 +1,13 @@
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .container__chat {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 69px);
+  height: calc(100vh - 130px);
   background-color: #f8f9fb;
 }
 
@@ -9,7 +15,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  padding: 0 1rem;
+  padding: 2.4rem .4rem;
 
   .chat-header-left {
     display: flex;
@@ -102,4 +108,26 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+
+.icon__principal {
+  color: #000000 !important;
+}
+  mat-icon {
+    color: #FFFFFF !important;
+  }
+
+mat-menu {
+  //  background: linear-gradient(135deg, #1B1B3A, #2E86AB);
+  //  color: #FFFFFF;
+}
+
+.container-option {
+
+   button {
+   mat-icon{
+    color: #FFFFFF !important;
+   }
+   }
 }

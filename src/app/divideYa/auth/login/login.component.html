@@ -5,7 +5,9 @@
     <mat-card>
       <div class="container__children__right">
         <div class="container__group">
-          <div class="container__children__right__img"></div>
+          <div class="container__logo">
+            <img src="assets/logo/logo.png" alt="">
+          </div>
           <div class="container__children__right__text">
             <h2> Iniciar Sesión</h2>
           </div>
@@ -53,12 +55,12 @@
 
             <div class="type__register">
               <div class="other__register">
-                <button mat-flat-button class="btn btn-secondary" (click)="registerOther()">Normal</button>
+                <button mat-flat-button class="btn btn-secondary" (click)="registerOther()">Registrarse</button>
               </div>
 
-              <div class="register__google">
+              <!-- <div class="register__google">
                 <button mat-flat-button class="btn btn-primary">Google</button>
-              </div>
+              </div> -->
 
             </div>
 
@@ -75,3 +77,10 @@
 
   </div>
 </div>
+
+
+@if (spinnerShow) {
+  <div class="container__spiner">
+    <app-spiner [title]="'Un momento estamos validando su información'"></app-spiner>
+  </div>
+}

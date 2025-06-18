@@ -1,4 +1,44 @@
 .container__background {
-  background-color: #efefef;
-  height:100vh;
+  background: linear-gradient(
+      to right,
+      #e3e9f0,
+      #d4dde9) !important;
+  height: 100vh;
+}
+
+.install-banner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  z-index: 9999;
+  animation: slideDown 0.5s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
+  .banner-buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      background-color: white;
+      color: #1976d2;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+
+      &:hover {
+        background-color: #e3f2fd;
+      }
+    }
+  }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }

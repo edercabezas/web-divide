@@ -54,13 +54,16 @@ mat-card {
   }
 
   .form-actions {
-    margin-top: 1.5rem;
+    margin-top: .5rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
 
+    padding-bottom: 4rem;
+
     button {
-      min-width: 120px;
+      // min-width: 120px;
+      width: 100%;
       font-size: 1rem;
       border-radius: 6px;
     }

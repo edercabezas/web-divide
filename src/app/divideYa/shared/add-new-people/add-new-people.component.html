@@ -1,0 +1,53 @@
+<div class="container__new__people">
+    <div class="container__title">
+        <h2 mat-dialog-title>Buscar y agregar usuarios</h2>
+    </div>
+
+
+    <div class="chat-input">
+        <mat-form-field class="input-full" appearance="outline">
+            <input matInput [(ngModel)]="people" placeholder="Usuario a consultar" />
+        </mat-form-field>
+        <button mat-fab color="accent" (click)="searchUser()">
+            <mat-icon class="icon__principal">search</mat-icon>
+        </button>
+    </div>
+</div>
+
+
+@if (isSearching) {
+<div class="mt-2">🔍 Buscando...</div>
+}
+
+@if (getUserSearch && getUserSearch.length > 0) {
+<div class="result">
+    <!-- <h3>Resultados:</h3> -->
+    @for (user of getUserSearch; track $index) {
+    <div class="user-card">
+        <div class="info">
+            <div class="avatar">{{ user?.photo }}</div>
+            <div>
+                <strong> {{ '@' + user?.userSecret }}</strong><br />
+                {{ user.userName }}
+            </div>
+        </div>
+          <button mat-flat-button type="button" class="btn btn-success" (click)="agregarYChatear(user)">
+              <mat-icon>add</mat-icon><span>Agregar</span>
+            </button>
+    </div>
+    }
+
+</div>
+}
+
+
+@if (getUserSearch && getUserSearch.length === 0) {
+<div>
+    ⚠️ No se encontraron resultados para '{{ people }}'
+</div>
+}
+
+
+<div class="actions">
+    <button mat-button (click)="cancelar(null)">Cancelar</button>
+</div>

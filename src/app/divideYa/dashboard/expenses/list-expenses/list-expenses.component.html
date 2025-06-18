@@ -8,16 +8,25 @@
         <img src="assets/group/shared-50.svg" alt="" (click)="shareGroup(dataExpenses)">
       </div>
     </div>
-
+    <div class="container__name__group">
+      <h3>{{ dataExpenses?.name }}</h3>
+    </div>
     <mat-card>
-      <div class="container__name__group">
-        <h3>Actualización del Gasto</h3>
-      </div>
-
       <div class="container__total__amount">
-        <span>Valor acordado </span>
+        <span>Presupuesto </span>
         <h3>{{dataExpenses?.totalAmount | currency}}</h3>
       </div>
+
+      <div class="container__members_pay">
+        <span>Gatos</span>
+        <h3>{{ newExpenses | currency }}</h3>
+      </div>
+
+      <div class="container__members_pay">
+        <span>Saldo</span>
+        <h3>{{ +dataExpenses?.totalAmount - newExpenses | currency }}</h3>
+      </div>
+
 
       <div class="container__members">
         <span>Integrantes </span>
@@ -33,14 +42,55 @@
         <span>Consignado</span>
         <h3>{{ numberFinish }}</h3>
       </div>
-      
-      <div class="container__description">
-        <span>Descripción</span>
-        <h3> {{ dataExpenses?.descripcion}}</h3>
+
+      <div class="container__members_pay">
+        <span>Estado</span>
+        <h3>{{ this.dataExpenses?.status? 'Abierto': 'Cerrado' }}</h3>
       </div>
 
+
     </mat-card>
-    <span>Dividir entre</span>
+
+    <div class="container__check__members__header">
+      <div class="container__creator">
+        <span>Nuevo gasto</span>
+      </div>
+      <div class="container__button">
+        <button mat-flat-button type="button" class="btn btn-success" (click)="addExpense()"
+          [disabled]="this.dataExpenses?.status === false">
+          <mat-icon>add</mat-icon><span>Agregar</span>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="chat-input">
+      <mat-form-field class="input-full" appearance="outline">
+        <input matInput [(ngModel)]="inputExpense" placeholder="Nuevo Gasto" />
+      </mat-form-field>
+      <mat-form-field class="input-full" appearance="outline">
+        <input matInput [(ngModel)]="inputValue" placeholder="Valor" />
+      </mat-form-field>
+    </div>
+    @if (expensesData && expensesData.length > 0) {
+    <div class="container__items">
+      @for (item of expensesData; track $index; let i = $index) {
+      <div class="container__item__expenses">
+        <div class="container__text">
+          <span> {{ item?.inputExpense }}</span>
+        </div>
+        <div class="container__value">
+          <span> {{ item?.inputValue | currency }}</span>
+        </div>
+        <div class="container__delete">
+          <mat-icon (click)="deleteItem(i, item)">close</mat-icon>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+    <h3>Pagos</h3>
     <mat-card>
 
       <div class="container__check__members">
@@ -59,35 +109,41 @@
 
         @for (item of dataExpenses?.miembrosDetalle; track item; let i = $index) {
         <div class="container__checkbox">
-        
+
           <mat-checkbox class="large-checkbox" [(ngModel)]="item.payGroup"
-            [disabled]="dataExpenses.userID !== dataStorage.userID" (change)="checkData(item)">
+            [disabled]="(dataExpenses.userID !== dataStorage.userID) || (this.dataExpenses?.status === false)"
+            (change)="checkData(item)">
             <div class="container__status">
               <span>{{ item.userName }}</span>
             </div>
           </mat-checkbox>
           <span>{{ item.payGroup ? 'Pagado' : 'Pendiente'}}</span>
-         
+
         </div>
         }
 
       </div>
     </mat-card>
 
-       <div class="container__button__group">
-        <div class="container__button__history">
-          <button mat-flat-button type="button" class="btn btn-success">
-            <span>Ver historial</span>
-          </button>
-        </div>
+    <div class="container__button__group">
 
-         <div class="container__button__close__group">
-          <button mat-flat-button type="button" class="btn btn-success">
-            <span>Cerrar grupo</span>
-          </button>
-        </div>
-
+      @if ((dataExpenses?.userID === dataStorage?.userID)) {
+      <div class="container__button__history">
+        <button mat-flat-button type="button" class="btn btn-success" (click)="closeGroup()">
+          <span>{{ this.dataExpenses?.status ? 'Cerrar grupo' : 'Reabrir grupo'}}</span>
+        </button>
       </div>
+      }
+
+
+
+      <div class="container__button__close__group">
+        <button mat-flat-button type="button" class="btn btn-success" (click)="openModalHistory()">
+          <span>Ver historial</span>
+        </button>
+      </div>
+
+    </div>
   </div>
 </div>
 

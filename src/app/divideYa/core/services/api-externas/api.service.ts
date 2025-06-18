@@ -9,6 +9,7 @@ export class ApiService {
   constructor(private httpC: HttpClient) { }
 
   private API_UBICACION = 'https://api.ipbase.com/v1/json/';
+  private NORICES = 'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada';
 
 
   async getUbicacion(): Promise<any> {
@@ -35,6 +36,12 @@ export class ApiService {
     const day = value.substring(6, 8);
 
     return `${year}-${month}-${day}`;
+
+  }
+
+ async getNotice(): Promise<any> {
+    const  response = await fetch(this.NORICES);
+    return await response.json();
 
   }
 

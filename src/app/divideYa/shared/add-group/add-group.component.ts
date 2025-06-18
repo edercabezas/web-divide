@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, Output, EventEmitter} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 
 @Component({
@@ -11,7 +11,7 @@ import {MatIcon} from '@angular/material/icon';
   styleUrl: './add-group.component.scss'
 })
 export class AddGroupComponent {
-
+ @Output() openModalSearchUser = new EventEmitter<any>();
 
 @HostListener('window:scroll', ['$event'])
   scrolled: number = 0;
@@ -27,6 +27,10 @@ export class AddGroupComponent {
 
   @HostListener('window:scroll', ['$event'])  onWindowScroll(data: any) {
     this.scrolled  = window.scrollY;
+  }
+
+  returnDataButton(): void {
+    this.openModalSearchUser.emit();
   }
 
 }

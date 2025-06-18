@@ -9,6 +9,7 @@ import {AuthService} from '../core/services/suth/auth.service';;
 import {MatDialog} from '@angular/material/dialog';
 import { AlertService } from '../core/services/alert/alert.service';
 import { GeneralService } from '../core/services/general/general.service';
+import { SpinerComponent } from "../shared/spiner/spiner.component";
 
 @Component({
   selector: 'app-guest',
@@ -17,7 +18,8 @@ import { GeneralService } from '../core/services/general/general.service';
     CurrencyPipe,
     MatButton,
     MatIcon,
-  ],
+    SpinerComponent
+],
   standalone: true,
   templateUrl: './guest.component.html',
   styleUrl: './guest.component.scss',
@@ -37,6 +39,7 @@ export default class GuestComponent implements OnInit{
   dialog: MatDialog = inject(MatDialog);
   guestData: any;
   isAuthenticated: boolean = false;
+  spinnerShow: boolean = false;
   dataStorage: any;
   constructor() {
 
@@ -76,7 +79,7 @@ export default class GuestComponent implements OnInit{
   }
 
   readGroupGuest(token: any): void {
-
+     this.spinnerShow = true;
     if (typeof window !== 'undefined') {
      const data = localStorage.getItem('token');
 
@@ -85,6 +88,8 @@ export default class GuestComponent implements OnInit{
       this._crud.readGroupGuest(token, this.dataStorage?.userID).then((response: any) => {
         console.log(response)
         this.guestData = response;
+      }).finally(() => {
+        this.spinnerShow = false;
       })
 
     }
@@ -132,12 +137,34 @@ export default class GuestComponent implements OnInit{
 
     noMemberGroup(): void {
       this._alert.showToasterUpdate('Puedes crear grupos agregar tus amigos y interactuar con ellos');
+      this.createNotification('Acaba de aceptar la invitacion al grupo')
       this._route.navigate(['dashboard'])
     }
 
   private _addGroup(): void {
     localStorage.removeItem('token');
+      this.createNotification('Acaba de rechazar la invitacion al grupo')
       this._alert.showToasterFull('Ya eres parte del grupo puedes intercambair mensajes con los integrantes');
       this._route.navigate(['dashboard/mis-grupos'])
   }
+
+
+  
+  createNotification(message: string): void {
+    const data = {
+      // groupID: this.dataExpenses.uid,
+      groupName: this.guestData?.nombreGrupo,
+      userID: this._general.getStorage()?.userID,
+      userName: this._general.getStorage()?.userName,
+      typeNotification: 'enter-group',
+      message: message,
+      status: false,
+      colorNotification: '#158b54',
+      iconNotification: 'expense'
+    };
+    this._general.createNotificationGeneral(data, '/notification').then((response: any) => {
+      console.log(response);
+    });
+  }
+
 }

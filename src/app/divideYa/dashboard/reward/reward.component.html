@@ -1,0 +1,31 @@
+<div class="container__reward">
+    <!-- <div class="video-feed-container">
+        <h2>🎬 Mira videos y gana puntos</h2>
+        <mat-list>
+            @for (video of videos; track video) {
+            <mat-list-item (click)="openVideoModal(video)">
+                <img matListAvatar [src]="video.thumbnail" alt="Video" />
+                <div matLine>{{ video.title }}</div>
+                <div matLine class="mat-subheading-1">{{ video.description }}</div>
+            </mat-list-item>
+            }
+
+        </mat-list>
+    </div> -->
+
+
+
+    <div class="video-feed-container">
+        <h2 class="section-title">🎬 Gana puntos viendo videos</h2>
+
+        <cdk-virtual-scroll-viewport class="viewport" itemSize="280">
+            <div *cdkVirtualFor="let video of videos" class="video-card" (click)="openVideo(video)">
+                <img [src]="video.thumbnail" alt="Video Thumbnail" />
+                <div class="video-info">
+                    <h3>{{ video?.title }}</h3>
+                    <p>{{ video?.points }} puntos</p>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+    </div>
+</div>

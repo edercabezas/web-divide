@@ -52,8 +52,9 @@ export class ModalCreateGroupComponent implements OnInit{
     const description = this.registerGroupForm.get('description')?.value;
     const value = this.registerGroupForm.get('value')?.value;
     const privilege = this.registerGroupForm.get('privilege')?.value;
+    const typeGroup = this.registerGroupForm.get('typeGroup')?.value;
 
-    this.dialogRef.close({group, description, value, privilege});
+    this.dialogRef.close({group, description, value, privilege, typeGroup});
   }
 
 
@@ -61,8 +62,9 @@ export class ModalCreateGroupComponent implements OnInit{
     this.registerGroupForm = this.formBuilder.group({
       group: ['', [Validators.required, Validators.minLength(8)]],
       description: [''],
-      value: ['', [Validators.required]],
+      value: [''],
       privilege: ['', [Validators.required]],
+      typeGroup: ['', [Validators.required]],
     });
   }
 

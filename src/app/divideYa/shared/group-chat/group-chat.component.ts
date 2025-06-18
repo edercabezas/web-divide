@@ -4,12 +4,17 @@ import { DatePipe, NgClass } from '@angular/common';
 import { ChatService } from '../../core/services/chat/chat.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from '../../core/services/general/general.service';
+import { AddGroupComponent } from '../add-group/add-group.component';
+import { AddNewPeopleComponent } from '../add-new-people/add-new-people.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PremiumPlansDialogComponent } from '../premium-plans-dialog/premium-plans-dialog.component';
 
 @Component({
   selector: 'app-group-chat',
   imports: [
     MatIcon,
-     NgClass
+    NgClass,
+    AddGroupComponent
   ],
   standalone: true,
   templateUrl: './group-chat.component.html',
@@ -23,7 +28,7 @@ export class GroupChatComponent implements OnInit, OnChanges {
   private _chat: ChatService = inject(ChatService);
   private _route: Router = inject(Router);
   _routeActivate: ActivatedRoute = inject(ActivatedRoute);
-
+  dialog: MatDialog = inject(MatDialog);
   @Output() returCodeGroup = new EventEmitter<any>();
   @Output() closeCodeGroup = new EventEmitter<any>();
 
@@ -46,7 +51,7 @@ export class GroupChatComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.groupChatID = this._routeActivate.snapshot.paramMap.get('groupID');
-     this.returCodeGroup.emit( this.groupChatID);
+    this.returCodeGroup.emit(this.groupChatID);
     this._getUserStorage();
   }
 
@@ -78,4 +83,41 @@ export class GroupChatComponent implements OnInit, OnChanges {
     this.closeCodeGroup.emit();
   }
 
-}
+
+  openUserSearchDialog(): void {
+
+    // this.openPremiumDialog();
+    // return;
+    //Validacion para premium solo si es premiun sino muestra otro modal
+
+    const dialogRef = this.dialog.open(AddNewPeopleComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+          this.groupChatID = result;
+          this._route.navigate(['dashboard/chats', result]).then();
+          this.getGroup();
+        // Usuario seleccionado para agregar y chatear
+        console.log('Usuario seleccionado:', result);
+      }
+    });
+  }
+
+    openPremiumDialog() {
+    const dialogRef = this.dialog.open(PremiumPlansDialogComponent, {
+      width: '95%',
+      maxWidth: '600px',
+      disableClose: true
+    });
+  
+    dialogRef.afterClosed().subscribe((selectedPlan) => {
+      if (selectedPlan) {
+        console.log('Plan seleccionado:', selectedPlan);
+        // Aquí haces la lógica de pago o anuncio según el plan
+      }
+    });
+  }
+    
+  }

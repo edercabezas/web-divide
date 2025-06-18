@@ -1,3 +1,63 @@
 .container__home {
   margin-top: 2.5rem;
+  padding: .7rem;
+}
+
+.container__notices {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+
+  .notices {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+
+  .container__notices__items {
+    a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    cursor: pointer;
+
+    mat-card {
+
+      @media (min-width: 768px) {
+        padding: 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+    .container__title {
+      span {
+        color: #000000;
+      }
+    }
+
+
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    }
+
+    margin-top: 1rem;
+
+    .container__img {
+      height: 200px;
+
+      img {
+        width: 100%;
+        border-radius: 1rem 1rem 0 0;
+        object-fit: inherit;
+        height: 100%;
+
+      }
+    }
+
+    .container__title {
+      padding: 1rem;
+    }
+  }
 }

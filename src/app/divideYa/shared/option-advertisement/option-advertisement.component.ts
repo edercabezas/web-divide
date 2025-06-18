@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -10,12 +10,19 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
   templateUrl: './option-advertisement.component.html',
   styleUrl: './option-advertisement.component.scss'
 })
-export class OptionAdvertisementComponent {
+export class OptionAdvertisementComponent implements OnInit{
 
-  
+    
   readonly dialogRef = inject(MatDialogRef<OptionAdvertisementComponent>);
   readonly data = inject<any>(MAT_DIALOG_DATA);
   
+
+
+  ngOnInit(): void {
+    console.log(this.data);
+  }
+
+
   
   verAnuncio(): void {
     this.dialogRef.close(true);

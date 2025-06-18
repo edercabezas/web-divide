@@ -4,4 +4,33 @@
     <app-water></app-water>
   </div>
 
+  <div class="container__notices">
+    <span class="notices">Noticias mas Importantes</span>
+    @for (item of dataNotices; track $index; let i = $index) {
+    <div class="container__notices__items">
+      <a [href]="item.link" target="_blank">
+        <mat-card>
+          <div class="container__img">
+            @if (item.enclosure.type === "video/mp4") {
+            <img src="assets/home/el-pais.jpeg" alt="">
+            } @else {
+            <img [src]="item.enclosure.link" alt="">
+            }
+
+          </div>
+          <div class="container__title">
+            <span>{{ item.description }}</span>
+          </div>
+        </mat-card>
+      </a>
+    </div>
+    @if (i % 3 === 0) {
+    <app-google-adsense [adSlot]="'4081267075'"></app-google-adsense>
+    }
+
+
+    }
+
+  </div>
+
 </div>

@@ -1,0 +1,35 @@
+<mat-dialog-content class="members-list">
+    <h2 mat-dialog-title>Integrantes del grupo</h2>
+    @for (member of data; track $index) {
+    <div class="member-item">
+        <div class="member-info">
+            <mat-icon>person</mat-icon>
+            <span>
+                {{ member?.userName }}
+                @if (member?.role === 'Admin') {
+                <small>{{userStorage === member.userID ? 'yo, ': ' '}} ({{ member?.role }})</small>
+                } @else {
+                <small>{{userStorage === member.userID ? 'yo, ': ' '}} ({{ member?.role }})</small>
+                }
+            </span>
+        </div>
+
+        @if (isCurrentUserAdmin ) {
+        <mat-icon color="warn" (click)="confirmRemove(member)" matTooltip="Eliminar miembro">close</mat-icon>
+        }
+    </div>
+    }
+
+    @if (data.length === 0) {
+    <div class="empty-msg">
+        No hay miembros en este grupo.
+    </div>
+    }
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-flat-button type="button" class="btn btn-secondary" (click)="onNoClick()">
+        <span>Cerrar</span>
+    </button>
+</mat-dialog-actions>

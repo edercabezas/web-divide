@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatButton } from "@angular/material/button";
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { GeneralService } from '../../../core/services/general/general.service';
 import { GroupService } from '../../../core/services/group/group.service';
 import { OptionAdvertisementComponent } from '../../../shared/option-advertisement/option-advertisement.component';
+import { GoogleAdsenseComponent } from '../../../shared/google-adsense/google-adsense.component';
+import { PremiumPlansDialogComponent } from '../../../shared/premium-plans-dialog/premium-plans-dialog.component';
 
 
 @Component({
@@ -21,7 +23,6 @@ import { OptionAdvertisementComponent } from '../../../shared/option-advertiseme
   imports: [
     MatButton,
     MatIcon,
-    AddGroupComponent,
     MatCard,
     CurrencyPipe,
     SpinerComponent,
@@ -35,47 +36,50 @@ import { OptionAdvertisementComponent } from '../../../shared/option-advertiseme
   styleUrl: './my-group.component.scss',
   providers: [DatePipe],
 })
-export default class MyGroupComponent implements OnInit {
+export default class MyGroupComponent implements OnInit, OnChanges {
   dialog: MatDialog = inject(MatDialog);
   _groupService: GroupService = inject(GroupService);
   _general: GeneralService = inject(GeneralService);
   _datePipe: DatePipe = inject(DatePipe);
   private _route: Router = inject(Router);
-  spinnerShow: boolean = true;
+  spinnerShow: boolean = false;
   dataStorage: any;
   groupList: any[];
   dataFilter: string = '';
   countRegisterGroup: number = 0;
   colectionRegisterGroup: string = '';
+  dataListGroup: any;
 
   constructor() {
     this.groupList = []
   }
-
-  ngOnInit(): void {
-    this._getUserStorage();
-
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('as,db,dsamsd')
   }
 
-
+  ngOnInit(): void {
+    console.log('as,db,dsamsd')
+    this._getUserStorage();
+  }
 
   openDialogPass(): void {
+
     if (this.countRegisterGroup >= 2) {
-        this.modalAnuncioGroup();
-        return;
+      // this.modalAnuncioGroup();
+      // this.openPremiumDialog();
+      //Aqui va el modal de premium 
+      // return;
     }
 
     const dialogRef = this.dialog.open(ModalCreateGroupComponent, {
-      height: '440px',
+      height: '520px',
       width: '430px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== null && result !== undefined) {
-        this.countGroupCreate();
+        this.updateCreateRegister();
         this.setGroup(result)
-      } else {
-        console.log('askjdkajdbasdkdjsakjads')
       }
     });
 
@@ -94,11 +98,12 @@ export default class MyGroupComponent implements OnInit {
       createdBy: this.dataStorage.userID,
       inviteToken: this._general.generarToken(),
       groupID: this._general.generateId(),
-      status: true
+      status: true,
+      type: 'Group',
+      typeGroup: data.typeGroup
     };
 
     this._groupService.createdGroup('/group', groupData).then((response: any) => {
-      console.log(response);
       this.getGroup();
     })
 
@@ -107,10 +112,11 @@ export default class MyGroupComponent implements OnInit {
   }
 
   getGroup(): void {
+    this.spinnerShow = true
     this._groupService.readGroup(this.dataStorage?.userID).then((response: any) => {
-      console.log(response)
       this.spinnerShow = false
       this.groupList = response;
+      this.dataListGroup = response;
     }).catch(() => this.spinnerShow = false)
       .finally(() => {
         this.spinnerShow = false
@@ -129,44 +135,46 @@ export default class MyGroupComponent implements OnInit {
   }
 
   public showExpense(data: any): void {
-    console.log(data)
     this._route.navigate(['dashboard/gasto', data.groupID]).then();
   }
 
   public showChat(data: any): void {
-    console.log(data)
     this._route.navigate(['dashboard/chats', data.id]).then();
-    // this._route.navigate(['dashboard/chat', data.id]).then();
   }
 
   filterDataGroup(): void {
-    console.log(this.dataFilter.length)
-    if (this.dataFilter && this.dataFilter.length > 2) {
-      this.dataFilter = this.dataFilter.toLowerCase();
-      this.groupList = this.groupList.filter(item => item.name.toLowerCase().includes(this.dataFilter));
-      console.log(this.groupList);
+    const resulFilter = this.dataFilter.toLowerCase().trim();
+    console.log(resulFilter.length)
+
+    if (resulFilter && resulFilter.length > 2) {
+
+      this.groupList = this.groupList.filter((data: any) =>
+        data.name.toLowerCase().includes(resulFilter)
+      );
+
+      if (this.groupList.length === 0) {
+        this.groupList = this.dataListGroup.filter((data: any) =>
+          data.name.toLowerCase().includes(resulFilter)
+        );
+      }
+
     } else {
-      this.getGroup();
+      this.groupList = this.dataListGroup;
     }
   }
 
   getCountGroup(): void {
-    this._groupService.readGroupMessage(this.dataStorage.userID, 'Group').then((response) => {
-      console.log(response);
+    this._groupService.readGroupMessage(this.dataStorage.userID, 'Group',).then((response) => {
       this.countRegisterGroup = response?.groupDoc?.amountRegister;
-      this.colectionRegisterGroup = response?.groupDoc?.groupId;
+      this.colectionRegisterGroup = response?.groupId;
     })
   }
 
   updateCreateRegister(): void {
-
-    console.log('a,mmasd', this.countRegisterGroup);
-    if(this.countRegisterGroup) {
-      console.log('a,mmasd', this.countRegisterGroup);
+    if (this.countRegisterGroup) {
       this.countGroupUpdate();
       return;
     }
-console.log('a,mmasd', this.countRegisterGroup);
     this.countGroupCreate();
   }
 
@@ -178,7 +186,6 @@ console.log('a,mmasd', this.countRegisterGroup);
       groupMessaID: this._general.generateId()
     };
     this._groupService.countGroupMessageCreate(data).then((response: any) => {
-      console.log(response);
       this.getCountGroup();
     });
   }
@@ -186,7 +193,6 @@ console.log('a,mmasd', this.countRegisterGroup);
   countGroupUpdate(): void {
     const registerNumber = this.countRegisterGroup ? this.countRegisterGroup + 1 : 1;
     this._groupService.updateCountRegister(registerNumber, this.colectionRegisterGroup).then((response: any) => {
-      console.log(response);
       this.getCountGroup();
     })
   }
@@ -194,15 +200,32 @@ console.log('a,mmasd', this.countRegisterGroup);
   modalAnuncioGroup(): void {
     const dialogRef = this.dialog.open(OptionAdvertisementComponent, {
       width: '400px',
-      disableClose: true
+      disableClose: true,
+      data: 'Has alcanzado el límite de grupos gratuitos. Para seguir creando más grupos, por favor mira este anuncio.'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result)
         // Aquí puedes redirigir a un video o mostrar el anuncio
         // this.irAVerElAnuncio();
       }
     });
   }
+
+
+  openPremiumDialog() {
+    const dialogRef = this.dialog.open(PremiumPlansDialogComponent, {
+      width: '95%',
+      maxWidth: '600px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe((selectedPlan) => {
+      if (selectedPlan) {
+        console.log('Plan seleccionado:', selectedPlan);
+        // Aquí haces la lógica de pago o anuncio según el plan
+      }
+    });
+  }
+
 }

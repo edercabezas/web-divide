@@ -1,0 +1,22 @@
+<div class="container__modal__password">
+    <h1 mat-dialog-title>Verificación de identidad</h1>
+    <div mat-dialog-content>
+        <p>Introduce tu contraseña para confirmar los cambios.</p>
+        <form [formGroup]="form">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Contraseña actual</mat-label>
+                <input matInput type="password" formControlName="password" [type]="eyeDisable ? 'password' : 'text'" />
+                <mat-icon matSuffix (click)="eyeDisable = !eyeDisable">
+                    {{ eyeDisable ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+            </mat-form-field>
+        </form>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button (click)="cancel()">Cancelar</button>
+        <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid">
+            Confirmar
+        </button>
+    </div>
+
+</div>

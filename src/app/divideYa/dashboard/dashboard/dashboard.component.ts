@@ -5,6 +5,7 @@ import {HeaderComponent} from '../../shared/header/header.component';
 import {MenuComponent} from '../../shared/menu/menu.component';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,9 @@ import {MatIcon} from '@angular/material/icon';
     HeaderComponent,
     MatDrawer,
     MatButton,
-    MatIcon
-  ],
+    MatIcon,
+    FooterComponent
+],
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

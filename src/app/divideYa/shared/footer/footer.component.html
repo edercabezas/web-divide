@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="footer-nav" fxLayout="row" fxLayoutAlign="space-around center">
+    <div class="container__icon">
+        
+        @for (item of menu; track $index) {
+        <button mat-icon-button [routerLink]="item.router">
+            <mat-icon>{{ item.icon }}</mat-icon><br/>
+            <span>{{ item.name }}</span>
+        </button>
+        }
+
+        <!-- <button mat-icon-button [routerLink]="['/groups']">
+            <mat-icon>group</mat-icon>
+             <p>Grupos</p>
+        </button>
+           <button mat-icon-button [routerLink]="['/chat']">
+            <mat-icon>chat</mat-icon>
+             <p>Chat</p>
+        </button>
+        <button mat-icon-button [routerLink]="['/profile']">
+            <mat-icon>person</mat-icon>
+            <p>Perfil</p>
+        </button> -->
+
+
+    </div>
+</mat-toolbar>

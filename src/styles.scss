@@ -26,4 +26,13 @@ $border-radius: 8px;
 
 mat-drawer-content{
   background-color: #efefef !important;
+  height: 100vh !important;
+}
+
+
+.mat-mdc-menu-panel {
+     background: linear-gradient(135deg, #1B1B3A, #2E86AB);
+      button {
+        color: #ffffff;
+      }
 }

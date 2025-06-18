@@ -1,32 +1,89 @@
 <div class="container__chat">
+
   <mat-toolbar color="primary" class="chat-header">
     <div class="chat-header-left">
-      <mat-icon>group</mat-icon>
-      <span>{{ dataGroup?.group }}</span>
+      <mat-icon class="icon__principal" (click)="closeGroupChat()">arrow_back</mat-icon>
+      <span>{{ dataGroup?.group}}</span>
     </div>
-    <mat-icon (click)="goBack()">close</mat-icon>
+    <mat-icon class="icon__principal" [matMenuTriggerFor]="menu">more_vert</mat-icon>
   </mat-toolbar>
 
   <div class="chat-container" id="chat-body">
     <div class="messages">
       @for (message of getMessageData; track message; let i = $index) {
-        <div class="message" [ngClass]="message.userID === _general.getStorage()?.userID ? 'right' : 'left'">
-          <mat-card class="message-card" [ngClass]="message.userID === _general.getStorage()?.userID ? 'own-message' : 'received-message'">
-            <div class="name">{{ message.userID === _general.getStorage()?.userID ? 'Yo' : message?.userName }}</div>
-            <div class="text">{{ message.chatMessage }}</div>
-            <div class="time">{{ returDate(message.timestamp) | date:'shortTime' }}</div>
-          </mat-card>
-        </div>
+      <div class="message" [ngClass]="message.userID === _general.getStorage()?.userID ? 'right' : 'left'">
+        <mat-card class="message-card"
+          [ngClass]="message.userID === _general.getStorage()?.userID ? 'own-message' : 'received-message'">
+          <div class="name">{{ message.userID === _general.getStorage()?.userID ? 'Yo' : message?.userName }}</div>
+          <div class="text">{{ message.chatMessage }}</div>
+          <div class="time">{{ returDate(message.timestamp) | date:'shortTime' }}</div>
+        </mat-card>
+      </div>
       }
     </div>
   </div>
 
   <div class="chat-input">
     <mat-form-field class="input-full" appearance="outline">
-      <input matInput [(ngModel)]="message" placeholder="Escribe un mensaje..." />
+      <input matInput [(ngModel)]="message" placeholder="Escribe un mensaje..." [disabled]="closeGroup" />
     </mat-form-field>
-    <button mat-fab color="accent" (click)="sendMessage()">
-      <mat-icon>send</mat-icon>
+    <button mat-fab color="accent"  [disabled]="closeGroup" >
+      @if (message) {
+        <mat-icon class="icon__principal" (click)="sendMessage()">send</mat-icon>
+      } @else {
+        <mat-icon class="icon__principal" (click)="selectImgProduct()">attach_file</mat-icon>
+      }
+      
+      
     </button>
   </div>
 </div>
+
+<div class="container-option">
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="modalMembers()">
+      <mat-icon>groups</mat-icon>
+      <span>Integrantes</span>
+    </button>
+
+    <button mat-menu-item (click)="shareGroup()">
+      <mat-icon>share</mat-icon>
+      <span>Compartir</span>
+    </button>
+
+    <button mat-menu-item (click)="shareGroup()">
+      <mat-icon>add</mat-icon>
+      <span>Agregar</span>
+    </button>
+    
+    <button mat-menu-item (click)="getDataExitGroup()"> 
+      <mat-icon>logout</mat-icon>
+      <span>Salir</span>
+    </button>
+  </mat-menu>
+
+ 
+
+</div>
+
+
+<!-- user_premium
+premiumID codigo
+userID id
+isPremium: true | false
+premiumlazo "Mensual/ anual"
+premiumInit
+premiumFinal
+createdAt Cuando creo registro
+updatedAt = Cuandos e modifico
+paymentMethod = metodo pago
+active = Quiere pausar
+
+
+coins {
+coinID: identi
+userID: user sesion
+coins: numero de monedas
+lastUpdated: cambio ultima fecha
+adsWatched: numero de anuncios
+} -->

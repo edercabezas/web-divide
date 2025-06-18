@@ -11,6 +11,7 @@
 
 
   margin-top: 2rem;
+  padding: 0 .7rem;
   //height: calc(100vh - 90px);
   display: flex;
   //justify-content: center;
@@ -19,7 +20,7 @@
   .container__group__item {
 
 
-    @media (min-width: 600px) {
+    @media (min-width: 760px) {
       padding: 0 10rem;
 
     }
@@ -39,7 +40,9 @@
   }
 }
 
-
+.container__card {
+  margin-bottom: 6rem;
+}
 .container__card__info__item {
   padding: 1rem;
 
@@ -118,7 +121,7 @@ mat-card {
 }
 
 .container__search {
-  padding: 1rem;
+  padding: 1rem 1rem .5rem 1rem;
 
   mat-form-field {
     width: 100%;
@@ -136,4 +139,17 @@ p {
   button {
     width: 100%;
   }
+}
+
+// .container__anuncio {
+//   height: 200px;
+//   padding: 1rem 0;
+// }
+
+p {
+  
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: .3rem
 }

@@ -1,0 +1,18 @@
+<div class="container__notification">
+
+    @for (item of notifications; track $index) {
+    <mat-card class="notification-card">
+        <div class="notif-container">
+            <mat-icon class="notif-icon">{{ item?.iconNotification }}</mat-icon>
+            <div class="notif-content">
+                <strong>Grupo: {{ item?.groupName + ' '}}</strong>
+                <span>{{ item.userName }}</span>
+                <div class="notif-text" [innerHTML]="item?.message"></div>
+                <div class="notif-time">{{ returDate(item.timestamp) }}</div>
+            </div>
+        </div>
+    </mat-card>
+}
+</div>
+
+

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import {AuthGuard} from './divideYa/guards/auth.guard';
+import { AuthGuard } from './divideYa/guards/auth.guard';
 import GuestComponent from './divideYa/guest/guest.component';
+
 
 export const routes: Routes = [
   {
@@ -10,13 +11,10 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./divideYa/dashboard/dashboard.routes.module').then(data => data.dashboard)
+    loadChildren: () => import('./divideYa/dashboard/dashboard.routes.module').then(data => data.dashboard),
   },
   {
     path: 'invitado/:token',
-     component: GuestComponent
-
-  },
-
-
+    component: GuestComponent
+  }
 ];

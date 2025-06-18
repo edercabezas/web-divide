@@ -3,13 +3,31 @@
 }
 
 mat-toolbar {
-  background-color: #f5f4f4 !important;
+  // background-color: #277aee !important;
+   background: linear-gradient(135deg, #1B1B3A, #2E86AB);
   position: fixed;
   z-index: 10000;
   margin-top: -4px !important;
+
 }
 
-
+  mat-icon {
+    color: #FFFFFF !important;
+  }
+  .container__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 63px;
+    padding-top: 7px;
+    img {
+      width: 100%;
+      height: auto;
+      // width: 170px;
+      height: 46px;
+      object-fit: fill;
+    }
+  }
 .container-float-page {
   right: 0;
   position: fixed;
@@ -48,4 +66,11 @@ mat-toolbar {
 
 mat-spinner {
   text-align: -webkit-center !important;
+}
+
+mat-menu {
+   background: linear-gradient(135deg, #1B1B3A, #2E86AB);
+   color: #FFFFFF;
+
+   display: block;
 }

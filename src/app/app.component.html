@@ -1,5 +1,16 @@
+@if (showInstallBanner) {
+<div class="install-banner">
+  <span>¿Quieres instalar DivideYa en tu dispositivo?</span>
+  <div class="banner-buttons">
+    <button (click)="installApp()">Sí</button>
+    <button (click)="dismissBanner()">No</button>
+  </div>
+</div>
+}
 
 <div class="container__background">
+
   <router-outlet />
+
 </div>
 

@@ -1,0 +1,24 @@
+mat-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.container__resumen {
+    mat-card-title {
+        padding: .2rem;
+    }
+
+    mat-card-header {
+        padding: 0 !important;
+    }
+
+    /* Puedes definir esto en tu estilos globales si no usas Tailwind */
+    mat-card {
+        margin-bottom: 10px;
+
+
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    margin-bottom: 6rem;
+}

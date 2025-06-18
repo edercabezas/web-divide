@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="text-center text-xl font-bold">Mejora tu experiencia en DivideYa 🚀</h2>
+
+<mat-dialog-content class="dialog-content">
+  <div class="plans-container">
+    <div class="plan-card basic" (click)="selectPlan('basic')">
+      <h3>Gratis con Anuncios 🎥</h3>
+      <p>Desbloquea las funciones viendo anuncios.</p>
+      <span class="badge">+10 monedas</span>
+    </div>
+
+    <div class="plan-card weekly" (click)="selectPlan('weekly')">
+      <h3>Plan Semanal 🗓️</h3>
+      <p>Acceso completo por 7 días.</p>
+      <span class="price">$9.000 COP</span>
+    </div>
+
+    <div class="plan-card biweekly" (click)="selectPlan('biweekly')">
+      <h3>Plan Quincenal 📆</h3>
+      <p>Acceso premium durante 15 días.</p>
+      <span class="price">$15.000 COP</span>
+    </div>
+
+    <div class="plan-card monthly" (click)="selectPlan('monthly')">
+      <h3>Plan Mensual 🌟</h3>
+      <p>Lo mejor de DivideYa por 30 días.</p>
+      <span class="price">$20.000 COP</span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+   <button mat-flat-button type="button" class="btn btn-secondary" (click)="onNoClick()">
+        <span>Cerrar</span>
+    </button>
+</mat-dialog-actions>
