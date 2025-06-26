@@ -1,0 +1,53 @@
+::ng-deep .mat-dialog-container {
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.content {
+  margin-top: 10px;
+}
+
+.message {
+  font-size: 16px;
+  color: #333;
+}
+
+.success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.success-text {
+  color: green;
+  font-weight: 600;
+}
+
+.ad-preview {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  background-color: #fdf6e3;
+  gap: 10px;
+}
+
+.ad-icon {
+  font-size: 32px;
+  color: #ff9800;
+}
+
+.ad-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}

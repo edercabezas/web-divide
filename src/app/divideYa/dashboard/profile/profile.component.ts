@@ -12,7 +12,6 @@ import { CrudService } from '../../core/services/crud/crud.service';
 import { GeneralService } from '../../core/services/general/general.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReauthenticateDialogComponent } from '../../shared/reauthenticate-dialog/reauthenticate-dialog.component';
-import { GoogleAdsenseComponent } from '../../shared/google-adsense/google-adsense.component';
 import { AlertService } from '../../core/services/alert/alert.service';
 
 @Component({

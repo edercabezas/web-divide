@@ -16,7 +16,7 @@ import { MatFormField, MatInput } from '@angular/material/input';
 import { HistoryExpensesComponent } from '../../../shared/history-expenses/history-expenses.component';
 import { MatDialog } from '@angular/material/dialog';
 import { serverTimestamp } from 'firebase/firestore';
-
+import { OptionAdvertisementComponent } from '../../../shared/option-advertisement/option-advertisement.component';
 
 @Component({
   selector: 'app-list-expenses',
@@ -43,7 +43,7 @@ export default class ListExpensesComponent implements OnInit {
   _routeActivate: ActivatedRoute = inject(ActivatedRoute);
   _general: GeneralService = inject(GeneralService);
   _alert: AlertService = inject(AlertService);
-   dialog: MatDialog = inject(MatDialog);
+  dialog: MatDialog = inject(MatDialog);
 
   spinnerShow: boolean = true;
   public dataExpenses: any;
@@ -54,8 +54,16 @@ export default class ListExpensesComponent implements OnInit {
   inputExpense: string = '';
   inputValue: number = 0;
   newExpenses: number = 0;
+  countRegisterExpense: number = 0;
+
+  colectionRegisterGroup: string = '';
 
   expensesData: any[] = [];
+
+
+  conuntGroup: number = 0;
+  countShare: number = 0;
+  countExpense: number = 0;
 
   constructor() {
   }
@@ -63,7 +71,8 @@ export default class ListExpensesComponent implements OnInit {
     this._getUserStorage();
     this.expenseID = this._routeActivate.snapshot.paramMap.get('expenseID');
     this.getExpenses();
-
+    this.getCountGroup();
+    this.getConfiguration();
   }
 
   public checkData(data: any) {
@@ -102,6 +111,14 @@ export default class ListExpensesComponent implements OnInit {
     console.log(this.dataStorage)
   }
   public shareGroup(group: any): void {
+
+
+    if (this.countRegisterExpense) {
+      this.modalAnuncioGroup();
+      return;
+    }
+
+    this.countGroupCreate();
     this._general.sharedLink(group)
   }
 
@@ -145,10 +162,17 @@ export default class ListExpensesComponent implements OnInit {
 
   public addExpense(): void {
 
+    if (this.countRegisterExpense > this.countExpense) {
+      this.modalAnuncioGroup();
+      return;
+    }
+
+
     if (this.inputExpense?.trim() === '' || this.inputValue === 0) {
       this._alert.showToasterWarning('Debes diligenciar ambos campos');
       return;
     }
+
     const data: any = {
       expenseID: this._general.generateId(),
       inputExpense: this.inputExpense,
@@ -171,7 +195,7 @@ export default class ListExpensesComponent implements OnInit {
       this.inputExpense = '';
       this.inputValue = 0;
     })
-
+    this.updateCreateRegister();
     this.expensesData.push(data);
 
   }
@@ -190,37 +214,120 @@ export default class ListExpensesComponent implements OnInit {
       } else {
         this._alert.showToasterError(response.message);
       }
-    }).finally(() => this.getExpensesData())
+    }).finally(() => {
+      this.updateCreateRegister();
+      this.getExpensesData()
+    })
   }
 
   returValueExpenses(): void {
 
-  this.newExpenses = this.expensesData 
-  .map(expen => +expen.inputValue) // Extrae solo el campo `valor`
-  .reduce((acc, curr) => acc + curr, 0);
+    this.newExpenses = this.expensesData
+      .map(expen => +expen.inputValue) // Extrae solo el campo `valor`
+      .reduce((acc, curr) => acc + curr, 0);
   }
 
 
-  
-    openModalHistory(): void {
-      const dialogRef = this.dialog.open(HistoryExpensesComponent, {
-        width: '400px',
-        disableClose: true,
-       data: {
-      groupName: this.dataExpenses?.name,
-      initialAmount: +this.dataExpenses?.totalAmount,
-      totalValue: (+this.dataExpenses?.totalAmount) + (+this.newExpenses),
-      expenses: this.expensesData
+
+  openModalHistory(): void {
+
+    if (this.countRegisterExpense >= 10) {
+      this.modalAnuncioGroup();
+      return;
     }
-      });
-  
-      dialogRef.afterClosed().subscribe((result: any) => {
-        if (result) {
-          console.log(result)
-          // Aquí puedes redirigir a un video o mostrar el anuncio
-          // this.irAVerElAnuncio();
-        }
-      });
+
+
+    const dialogRef = this.dialog.open(HistoryExpensesComponent, {
+      width: '400px',
+      disableClose: true,
+      data: {
+        groupName: this.dataExpenses?.name,
+        initialAmount: +this.dataExpenses?.totalAmount,
+        totalValue: (+this.dataExpenses?.totalAmount) + (+this.newExpenses),
+        expenses: this.expensesData
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.countGroupCreate();
+      }
+    });
+  }
+
+    updateCreateRegister(): void {
+    if (this.countRegisterExpense) {
+      this.countGroupUpdate();
+      return;
     }
+    this.countGroupCreate();
+  }
+
+  countGroupCreate(): void {
+
+    console.log(this.countRegisterExpense)
+    const data = {
+      userID: this.dataStorage.userID,
+      muduloName: 'Expense',
+      amountRegister: this.countRegisterExpense ? this.countRegisterExpense + 1 : 1,
+      groupMessaID: this._general.generateId()
+    };
+    this._groupService.countGroupMessageCreate(data).then((response: any) => {
+      this.getExpensesData();
+    });
+  }
+
+    countGroupUpdate(): void {
+    const registerNumber = this.countRegisterExpense ? this.countRegisterExpense + 1 : 1;
+    this._groupService.updateCountRegister(registerNumber, this.colectionRegisterGroup).then((response: any) => {
+      this.getCountGroup();
+    })
+  }
+
+
+  getCountGroup(): void {
+    this._groupService.readGroupMessage(this.dataStorage.userID, 'Expense',).then((response) => {
+      this.countRegisterExpense = response?.groupDoc?.amountRegister;
+      this.colectionRegisterGroup = response?.groupId;
+    })
+  }
+
+
+  modalAnuncioGroup(): void {
+    const dialogRef = this.dialog.open(OptionAdvertisementComponent, {
+      width: '400px',
+      disableClose: true,
+      data: 'Has alcanzado el límite permitido para realizar esta accion. Para seguir disfrutando, puedes ver anuncios.'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.countRegisterExpense = 0;
+        this.countGroupCreate();
+      }
+    });
+  }
+
+  getConfiguration(): void {
+    this._general.getGroupChat().then((response: any) => {
+
+      console.log(response)
+      this.fiterMyOption(response);
+    }).catch(() => this.spinnerShow = false)
+      .finally(() => {
+        this.spinnerShow = false
+      });
+  }
+
+  fiterMyOption(data: any): void {
+
+    const conuntGroup = data.filter((item: any) => item.module === 'Group');
+    const countShare = data.filter((item: any) => item.module === 'Shared');
+    const countExpense = data.filter((item: any) => item.module === 'Expense');
+    this.conuntGroup = conuntGroup[0].value;
+    this.countShare = countShare[0].value;
+    this.countExpense = countExpense[0].value;
+
+  }
 
 }

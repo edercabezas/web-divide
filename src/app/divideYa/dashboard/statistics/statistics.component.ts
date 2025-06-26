@@ -6,7 +6,7 @@ import { GraphicsComponent } from '../../shared/graphics/graphics.component';
   selector: 'app-statistics',
   imports: [
     ButtonBackComponent,
-    GraphicsComponent
+    GraphicsComponent,
 ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.scss'

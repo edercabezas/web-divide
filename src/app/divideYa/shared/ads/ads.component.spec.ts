@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GoogleAdsenseComponent } from './google-adsense.component';
+import { AdsComponent } from './ads.component';
 
-describe('GoogleAdsenseComponent', () => {
-  let component: GoogleAdsenseComponent;
-  let fixture: ComponentFixture<GoogleAdsenseComponent>;
+describe('AdsComponent', () => {
+  let component: AdsComponent;
+  let fixture: ComponentFixture<AdsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoogleAdsenseComponent]
+      imports: [AdsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GoogleAdsenseComponent);
+    fixture = TestBed.createComponent(AdsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

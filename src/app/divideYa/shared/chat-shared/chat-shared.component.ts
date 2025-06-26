@@ -19,7 +19,6 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { DatePipe, Location, NgClass } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { CrudService } from '../../core/services/crud/crud.service';
 import { GeneralService } from '../../core/services/general/general.service';
 import { ChatService } from '../../core/services/chat/chat.service';
 import { Subscription } from 'rxjs';
@@ -27,9 +26,9 @@ import { OptionAdvertisementComponent } from '../option-advertisement/option-adv
 import { MatDialog } from '@angular/material/dialog';
 import { GroupService } from '../../core/services/group/group.service';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { MatIconButton } from '@angular/material/button';
 import { ModalMembersComponent } from '../modal-members/modal-members.component';
 import { AlertService } from '../../core/services/alert/alert.service';
+import { AdsComponent } from '../ads/ads.component';
 
 @Component({
   selector: 'app-chat-shared',
@@ -50,7 +49,8 @@ import { AlertService } from '../../core/services/alert/alert.service';
     MatMenuTrigger,
     MatMenuItem,
     MatIconModule,
-  ],
+    AdsComponent
+],
   templateUrl: './chat-shared.component.html',
   styleUrl: './chat-shared.component.scss',
   providers: [{ provide: MAT_DATE_LOCALE, useValue: "es-ES" }],
@@ -76,6 +76,10 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
   membersCount: number = 0;
   colectionRegisterChat: any;
   private messagesSub: Subscription | undefined;
+  conuntGroup: number = 0;
+  countShare: number = 0;
+  countExpense: number = 0;
+  countChat: number = 0;
 
   public closeGroup: boolean = false;
 
@@ -84,8 +88,8 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.getCountChat();
     this.getMemberGroup();
+    this.getConfiguration();
     this.messagesSub = this._chat.messages$.subscribe((msgs) => {
-      console.log(msgs)
       this.getMessageData = msgs;
       setTimeout(() => this.scrollToBottom(), 100);
     });
@@ -111,11 +115,11 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   selectImgProduct(): void {
-    console.log('seleccionar imagen')
   }
 
   sendMessage(): void {
-    if (this.countRegisterChat >= 100) {
+    console.log(this.countRegisterChat, this.countChat)
+    if (this.countRegisterChat > this.countChat) {
       this.modalAnuncioGroup();
       return;
     }
@@ -135,8 +139,6 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
       });
       this.message = '';
     }
-
-
   }
 
   scrollToBottom(): void {
@@ -166,23 +168,17 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
 
   getCountChat(): void {
     this._groupService.readGroupMessage(this._general.getStorage()?.userID, 'Chat').then((response) => {
-      console.log(response);
       this.countRegisterChat = response?.groupDoc?.amountRegister;
-
       this.colectionRegisterChat = response?.groupId;
-      console.log(this.colectionRegisterChat)
     })
   }
 
   updateCreateRegister(): void {
 
-    console.log('a,mmasd', this.countRegisterChat);
     if (this.countRegisterChat) {
-      console.log('a,mmasd', this.countRegisterChat);
       this.countChatUpdate();
       return;
     }
-    console.log('a,mmasd', this.countRegisterChat);
     this.countChatCreate();
   }
 
@@ -210,16 +206,17 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
 
   modalAnuncioGroup(): void {
     const dialogRef = this.dialog.open(OptionAdvertisementComponent, {
-      width: '400px',
+      width: '600px',
+      height: '500px',
       disableClose: true,
-      data: 'Para seguir interactuando  con los participantes de este grupo puedes ver un anuncio esto nos ayudara!',
+      data: 'Para seguir interactuando con los participantes de este grupo puedes ver un anuncio esto nos ayudara!',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log(result)
-        // Aquí puedes redirigir a un video o mostrar el anuncio
-        // this.irAVerElAnuncio();
+        this.countRegisterChat = 0;
+        this.countChatUpdate();
       }
     });
   }
@@ -246,7 +243,6 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   getMemberGroup(): void {
-    console.log('askjbkasbjdbkaskbd')
     this._chat.getMembersChat(this.groupChatID).then((response: any) => {
       this.ListMemberGroup = response;
       console.log(response)
@@ -291,7 +287,29 @@ export class ChatSharedComponent implements OnInit, OnChanges, OnDestroy {
     })
   }
 
-  searchUser(): void {
-    
+  getConfiguration(): void {
+    this._general.getGroupChat().then((response: any) => {
+      this.fiterMyOption(response);
+    });
   }
+
+  fiterMyOption(data: any): void {
+
+    const conuntGroup = data.filter((item: any) => item.module === 'Group');
+    const countShare = data.filter((item: any) => item.module === 'Shared');
+    const countExpense = data.filter((item: any) => item.module === 'Expense');
+    const countChat = data.filter((item: any) => item.module === 'Chat');
+
+    console.log(countChat)
+    this.conuntGroup = conuntGroup[0].value;
+    this.countShare = countShare[0].value;
+    this.countExpense = countExpense[0].value;
+    this.countChat = countChat[0].value;
+
+  }
+
+  searchUser(): void {
+
+  }
+
 }

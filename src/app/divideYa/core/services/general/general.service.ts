@@ -3,8 +3,12 @@ import {
   addDoc,
   collection,
   Firestore,
-  serverTimestamp
+  serverTimestamp,
+  doc,
+  getDocs,
+  getDoc
 } from '@angular/fire/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -53,7 +57,7 @@ export class GeneralService {
   }
 
   sharedLink(group: any): void {
-    console.log('abrir link',group)
+    console.log('abrir link', group)
     const inviteLink = `https://divideya.com/invitado/${group.inviteToken}`;
     // const inviteLink = `http://localhost:4200/#/invitado/${group.inviteToken}`;
 
@@ -81,6 +85,19 @@ export class GeneralService {
   public generarToken(length = 10): string {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     return Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+  }
+
+
+  async getGroupChat(): Promise<any> {
+    const configCollection = collection(this.firestore, 'configuration');
+    const configSnap = await getDocs(configCollection);
+
+    const data = configSnap.docs.map(doc => ({
+      id: doc.id,  
+      ...doc.data() 
+    }));
+
+    return data;
   }
 
 

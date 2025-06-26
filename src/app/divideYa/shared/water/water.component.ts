@@ -37,7 +37,6 @@ export default class WaterComponent implements OnInit {
 
 
     this._api.getUbicacion().then((response: any) => {
-      console.log(response)
 
       this.city = response.city;
       this.department = response.region_name;

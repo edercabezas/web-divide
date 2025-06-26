@@ -5,6 +5,7 @@ import { ApexOptions, ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
 import { GraphicsService } from '../../core/services/graphics/graphics.service';
 import { GeneralService } from '../../core/services/general/general.service';
 import { SpinerComponent } from '../spiner/spiner.component';
+import { NativeBannerComponent } from '../native-banner/native-banner.component';
 
 @Component({
   selector: 'app-graphics',
@@ -15,8 +16,9 @@ import { SpinerComponent } from '../spiner/spiner.component';
     MatCardTitle,
     MatCardContent,
     MatCardHeader,
-    SpinerComponent
-  ],
+    SpinerComponent,
+    NativeBannerComponent
+],
   templateUrl: './graphics.component.html',
   styleUrl: './graphics.component.scss'
 })

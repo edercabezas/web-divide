@@ -2,15 +2,13 @@ import { AfterViewInit, ChangeDetectorRef, Component, inject, OnChanges, OnInit,
 import { GroupChatComponent } from '../../../shared/group-chat/group-chat.component';
 import { ChatSharedComponent } from '../../../shared/chat-shared/chat-shared.component';
 import { ActivatedRoute } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-import { GoogleAdsenseComponent } from '../../../shared/google-adsense/google-adsense.component';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-chats',
   imports: [
     GroupChatComponent,
     ChatSharedComponent,
-    GoogleAdsenseComponent,
 ],
   standalone: true,
   templateUrl: './list-chats.component.html',
@@ -19,6 +17,7 @@ import { GoogleAdsenseComponent } from '../../../shared/google-adsense/google-ad
 export default class ListChatsComponent implements OnInit, OnChanges, AfterViewInit  {
 
 
+    iframeUrl: SafeResourceUrl;
   _routeActivate: ActivatedRoute = inject(ActivatedRoute);
   public setGroupID: string = '';
   public groupChatID: any;
@@ -26,7 +25,9 @@ export default class ListChatsComponent implements OnInit, OnChanges, AfterViewI
   showGroupList: boolean = false;
   isMobile: boolean = false;
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer) { 
+     this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl('assets/home/modal.html');
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.groupChatID = this._routeActivate.snapshot.paramMap.get('groupID');
